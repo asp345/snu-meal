@@ -1,0 +1,41 @@
+import type { Restaurant } from "./model.js";
+
+export const RESTAURANTS: readonly Restaurant[] = [
+  { code: "student_union", name: "학생회관식당", building_number: "63동", building_name: "학생회관", fixed_menu: false, source: "snuco" },
+  { code: "jahayeon_3f", name: "자하연식당 3층", building_number: "109동", building_name: "농협", fixed_menu: false, source: "snuco" },
+  { code: "jahayeon_2f", name: "자하연식당 2층", building_number: "109동", building_name: "농협", fixed_menu: false, source: "snuco" },
+  { code: "burgerun_burger", name: "버거운버거", building_number: "101동", building_name: "아시아연구소", fixed_menu: true, source: "snuco" },
+  { code: "art_a", name: "예술계식당 A코너", building_number: "74동", building_name: null, fixed_menu: false, source: "snuco" },
+  { code: "art_b", name: "예술계식당 B코너", building_number: "74동", building_name: null, fixed_menu: false, source: "snuco" },
+  { code: "art_c", name: "예술계식당 C코너", building_number: "74동", building_name: null, fixed_menu: false, source: "snuco" },
+  { code: "art_grill", name: "예술계식당 직화코너", building_number: "74동", building_name: null, fixed_menu: false, source: "snuco" },
+  { code: "duremidam_order", name: "두레미담 식당", building_number: "75-1동", building_name: "전망대", fixed_menu: false, source: "snuco" },
+  { code: "duremidam_self", name: "두레미담 셀프코너", building_number: "75-1동", building_name: "전망대", fixed_menu: false, source: "snuco" },
+  { code: "dongwon", name: "동원관식당", building_number: "113동", building_name: null, fixed_menu: false, source: "snuco" },
+  { code: "cafeteria_3", name: "3식당 일반", building_number: "75-1동", building_name: "전망대", fixed_menu: false, source: "snuco" },
+  { code: "cafeteria_3_salad", name: "3식당 든든한끼샐러드코너", building_number: "75-1동", building_name: "전망대", fixed_menu: false, source: "snuco" },
+  { code: "building_302", name: "302동식당", building_number: "302동", building_name: null, fixed_menu: false, source: "snuco" },
+  { code: "building_301", name: "301동식당 일반", building_number: "301동", building_name: null, fixed_menu: false, source: "snuco" },
+  { code: "building_301_breakfast", name: "301동식당 천원의아침밥", building_number: "301동", building_name: null, fixed_menu: false, source: "snuco" },
+  { code: "building_301_takeout", name: "301동식당 TAKE-OUT", building_number: "301동", building_name: null, fixed_menu: false, source: "snuco" },
+  { code: "building_301_staff", name: "301동 1층 교직원전용식당", building_number: "301동", building_name: null, fixed_menu: false, source: "snuco" },
+  { code: "engineering_snack", name: "공대간이식당", building_number: "30-2동", building_name: null, fixed_menu: false, source: "snuco" },
+  { code: "foodcourt_seoga", name: "4층 푸드코트 서가앤쿡", building_number: "75-1동", building_name: "전망대", fixed_menu: true, source: "snuco" },
+  { code: "foodcourt_tokki", name: "4층 푸드코트 토끼정", building_number: "75-1동", building_name: "전망대", fixed_menu: true, source: "snuco" },
+  { code: "foodcourt_tofu", name: "4층 푸드코트 숨쉬는순두부", building_number: "75-1동", building_name: "전망대", fixed_menu: true, source: "snuco" },
+  { code: "foodcourt_205", name: "4층 푸드코트 이공오 돈까스와 우동", building_number: "75-1동", building_name: "전망대", fixed_menu: true, source: "snuco" },
+  { code: "building_220_katsu", name: "220동식당 경성 돈카츠", building_number: "220동", building_name: null, fixed_menu: true, source: "snuco" },
+  { code: "building_220_babi", name: "220동식당 바비든든", building_number: "220동", building_name: null, fixed_menu: true, source: "snuco" },
+  { code: "building_220_poppo", name: "220동식당 포포420", building_number: "220동", building_name: null, fixed_menu: true, source: "snuco" },
+  { code: "building_220_stew", name: "220동식당 값찌개", building_number: "220동", building_name: null, fixed_menu: true, source: "snuco" },
+  { code: "building_220_kitchen101", name: "220동식당 키친101", building_number: "220동", building_name: null, fixed_menu: true, source: "snuco" },
+  { code: "ourhome", name: "아워홈", building_number: "901동", building_name: null, fixed_menu: false, source: "snudorm" },
+  { code: "dorm_coop", name: "생협기숙사", building_number: "919동", building_name: "관악생활관", fixed_menu: false, source: "snudorm" },
+  { code: "vet", name: "수의대식당", building_number: "85동", building_name: "수의과대학", fixed_menu: false, source: "vet" }
+];
+
+const BY_NAME = new Map(RESTAURANTS.map((restaurant) => [restaurant.name, restaurant]));
+
+export function findRestaurant(name: string): Restaurant | undefined {
+  return BY_NAME.get(name);
+}

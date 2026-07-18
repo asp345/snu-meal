@@ -1,0 +1,35 @@
+name: Update meal data
+
+on:
+  schedule:
+    - cron: "17,47 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: meal-data
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Crawl and export
+        run: node dist/crawl.mjs --output "$RUNNER_TEMP/snu-meal-data"
+      - name: Publish data branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan data-publish
+          git rm -rf --ignore-unmatch .
+          cp -R "$RUNNER_TEMP/snu-meal-data/." .
+          git add --all
+          git commit -m "Update meal data"
+          git push --force origin HEAD:data
