@@ -42,7 +42,7 @@ body {
   min-height: 100vh;
   margin: 0;
   color: var(--ink);
-  background: linear-gradient(180deg, var(--blue-900) 0 12.5rem, var(--blue-50) 12.5rem);
+  background: linear-gradient(180deg, var(--blue-900) 0 14rem, var(--blue-50) 14rem);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -77,7 +77,7 @@ input:focus-visible {
   justify-content: space-between;
   gap: 24px;
   margin: 0 auto;
-  padding: 27px 0 30px;
+  padding: 27px 0 54px;
 }
 
 .brand-block {
@@ -615,14 +615,14 @@ noscript {
 
 @media (max-width: 780px) {
   body {
-    background: linear-gradient(180deg, var(--blue-900) 0 11rem, var(--blue-50) 11rem);
+    background: linear-gradient(180deg, var(--blue-900) 0 12rem, var(--blue-50) 12rem);
   }
 
   .header-inner {
     width: min(100% - 32px, 1180px);
     align-items: center;
     gap: 14px;
-    padding: 23px 0 27px;
+    padding: 23px 0 50px;
   }
 
   .brand-block h1 {
