@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#163f32" />
+    <meta name="theme-color" content="#0f2d52" />
     <meta name="description" content="서울대학교 교내 식당의 아침, 점심, 저녁 메뉴를 확인하세요." />
-    <title>오늘의 샤밥 | 서울대 학식</title>
+    <title>서울대 학식</title>
     <link rel="stylesheet" href="./style.css" />
     <script type="module" src="./app.js"></script>
   </head>
@@ -14,12 +14,12 @@
       <header class="site-header">
         <div class="header-inner">
           <div class="brand-block">
-            <p class="brand-kicker">SNU CAMPUS MEALS</p>
-            <h1>오늘의 <span>샤밥</span></h1>
-            <p class="brand-description">관악캠퍼스의 식사를 한눈에 살펴보세요.</p>
+            <p class="brand-kicker">SEOUL NATIONAL UNIVERSITY</p>
+            <h1>서울대 학식</h1>
+            <p class="brand-description">관악캠퍼스의 아침, 점심, 저녁 메뉴를 확인하세요.</p>
           </div>
           <div class="data-note" aria-label="데이터 업데이트 정보">
-            <p class="data-status" id="data-status">최신 메뉴를 확인하고 있습니다</p>
+            <p class="data-status" id="data-status">최신 메뉴 확인 중</p>
           </div>
         </div>
       </header>
@@ -28,7 +28,7 @@
         <section class="selection-panel" aria-label="메뉴 조회 조건">
           <div class="date-section">
             <div class="section-label-row">
-              <h2 class="control-label">날짜 선택</h2>
+              <h2 class="control-label">날짜</h2>
               <span class="scroll-hint" aria-hidden="true">가로로 넘겨보세요</span>
             </div>
             <div class="date-picker" id="date-picker" aria-label="날짜 선택"></div>
@@ -36,7 +36,7 @@
 
           <div class="filter-row">
             <div class="meal-type-filter">
-              <span class="control-label" id="meal-type-label">식사 시간</span>
+              <span class="control-label" id="meal-type-label">식사</span>
               <div
                 class="type-picker"
                 id="type-picker"
@@ -60,7 +60,6 @@
 
       <footer class="site-footer">
         <p>식단과 가격은 식당 사정에 따라 달라질 수 있습니다.</p>
-        <p class="footer-mark">서울대학교 식단 모아보기</p>
       </footer>
     </div>
     <noscript>메뉴를 확인하려면 JavaScript를 활성화해 주세요.</noscript>
