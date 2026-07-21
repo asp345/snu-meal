@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import type { CrawlResult } from "./model.js";
 import { buildExportData } from "./export.js";
+import { RESTAURANTS } from "./registry.js";
 
 test("export data is grouped in meal, building, and registry order", () => {
   const result: CrawlResult = {
@@ -106,6 +107,13 @@ test("export separates venues and keeps their counters together", () => {
       restaurants: ["경성 돈카츠", "바비든든", "포포420", "값찌개", "키친101"],
     },
   ]);
+});
+
+test("fixed menu classification distinguishes daily counters", () => {
+  const restaurants = new Map(RESTAURANTS.map((restaurant) => [restaurant.name, restaurant]));
+  assert.equal(restaurants.get("두레미담 식당")?.fixed_menu, true);
+  assert.equal(restaurants.get("두레미담 셀프코너")?.fixed_menu, false);
+  assert.equal(restaurants.get("공대간이식당")?.fixed_menu, true);
 });
 
 test("export rejects crawler restaurants outside the registry", () => {

@@ -88,7 +88,7 @@ export const RESTAURANTS: readonly Restaurant[] = [
     building_name: "전망대",
     display_name: "식당",
     venue_name: "두레미담 (5층)",
-    fixed_menu: false,
+    fixed_menu: true,
     source: "snuco",
   },
   {
@@ -188,7 +188,7 @@ export const RESTAURANTS: readonly Restaurant[] = [
     building_name: null,
     display_name: "공대간이식당",
     venue_name: null,
-    fixed_menu: false,
+    fixed_menu: true,
     source: "snuco",
   },
   {
