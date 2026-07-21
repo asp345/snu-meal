@@ -32,20 +32,27 @@ function decodeBody(body: Buffer, headers: IncomingHttpHeaders): string {
   }
 }
 
+function parseUrl(value: string): URL | undefined {
+  return URL.parse(value) ?? undefined;
+}
+
 export function fetchText(
   url: string,
   options: FetchTextOptions = {},
   redirects = 0,
 ): Promise<string> {
   return new Promise((resolve, reject) => {
-    const parsedUrl = new URL(url);
+    const parsedUrl = parseUrl(url);
+    if (!parsedUrl) {
+      reject(new Error(`Invalid URL: ${url}`));
+      return;
+    }
     const transport = parsedUrl.protocol === "https:" ? https : http;
     const request = transport.get(
       parsedUrl,
       {
         headers: options.userAgent ? { "user-agent": options.userAgent } : undefined,
-        rejectUnauthorized:
-          !(options.insecureSnucoTls && parsedUrl.hostname === "snuco.snu.ac.kr"),
+        rejectUnauthorized: !(options.insecureSnucoTls && parsedUrl.hostname === "snuco.snu.ac.kr"),
       },
       (response) => {
         const status = response.statusCode ?? 0;

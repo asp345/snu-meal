@@ -11,16 +11,20 @@
     "build:crawler": "esbuild src/export.ts --bundle --platform=node --target=node22 --format=esm --banner:js=\"import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);\" --outfile=dist/crawl.mjs",
     "build:web": "esbuild src/web/app.ts --bundle --platform=browser --target=es2022 --format=esm --outfile=public/app.js",
     "export": "node dist/crawl.mjs --output public/data",
+    "format": "prettier --write .github/workflows/*.yml package.json src public/index.html public/style.css",
+    "format:check": "prettier --check .github/workflows/*.yml package.json src public/index.html public/style.css",
     "test": "tsx --test src/*.test.ts src/**/*.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
+    "domhandler": "5.0.3",
     "htmlparser2": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
     "esbuild": "^0.25.0",
+    "prettier": "3.6.2",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0"
   }

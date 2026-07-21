@@ -44,12 +44,18 @@ function descendantText(element: Cheerio<Element>): string[] {
     }
     node.childNodes?.forEach(visit);
   };
-  element.contents().toArray().forEach((node) => visit(node as TextNodeLike));
+  element
+    .contents()
+    .toArray()
+    .forEach((node) => visit(node as TextNodeLike));
   return text;
 }
 
 function strippedText(element: Cheerio<Element>, separator: string): string {
-  return descendantText(element).map((part) => part.trim()).filter(Boolean).join(separator);
+  return descendantText(element)
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .join(separator);
 }
 
 function cellLines(element: Cheerio<Element>): string[] {
@@ -78,7 +84,11 @@ function jahayeon3f(cells: MealCell[]): GeneralizedMeals[] {
     let inSemiBuffet = false;
     let buffetNoMeat = false;
     for (const line of lines) {
-      if (line.startsWith("※") || line.includes("뷔페 특성상") || line.includes("가능성이 있으니")) {
+      if (
+        line.startsWith("※") ||
+        line.includes("뷔페 특성상") ||
+        line.includes("가능성이 있으니")
+      ) {
         continue;
       }
       if (line === "<+세미뷔페>") {
@@ -192,9 +202,8 @@ function sik3(cells: MealCell[]): GeneralizedMeals[] {
       if (line.startsWith("※")) continue;
       const section = SECTION_RE.exec(line);
       if (section) {
-        restaurant = sectionKey(section[1]) === "든든한끼샐러드코너"
-          ? "3식당 든든한끼샐러드코너"
-          : undefined;
+        restaurant =
+          sectionKey(section[1]) === "든든한끼샐러드코너" ? "3식당 든든한끼샐러드코너" : undefined;
         line = section[2].trim();
         if (!line) continue;
       }
@@ -296,7 +305,8 @@ function gongdae(cells: MealCell[]): GeneralizedMeals[] {
 function sectionedOptionalPrice(
   cells: MealCell[],
   sectionRestaurant: (section: string) => string | undefined,
-  normalize: (name: string, restaurant: string) => string[] = (name) => normalizeNames(name, SPLIT_PLUS_RE),
+  normalize: (name: string, restaurant: string) => string[] = (name) =>
+    normalizeNames(name, SPLIT_PLUS_RE),
   skipParenthetical = false,
 ): GeneralizedMeals[] {
   return cells.flatMap(({ type, lines }) => {
@@ -327,25 +337,28 @@ function sectionedOptionalPrice(
 }
 
 function foodcourt4f(cells: MealCell[]): GeneralizedMeals[] {
-  return sectionedOptionalPrice(cells, (section) => new Map([
-    ["서가앤쿡", "4층 푸드코트 서가앤쿡"],
-    ["토끼정", "4층 푸드코트 토끼정"],
-    ["숨쉬는순두부", "4층 푸드코트 숨쉬는순두부"],
-    ["이공오돈까스와우동", "4층 푸드코트 이공오 돈까스와 우동"],
-  ]).get(sectionKey(section)));
+  return sectionedOptionalPrice(cells, (section) =>
+    new Map([
+      ["서가앤쿡", "4층 푸드코트 서가앤쿡"],
+      ["토끼정", "4층 푸드코트 토끼정"],
+      ["숨쉬는순두부", "4층 푸드코트 숨쉬는순두부"],
+      ["이공오돈까스와우동", "4층 푸드코트 이공오 돈까스와 우동"],
+    ]).get(sectionKey(section)),
+  );
 }
 
 function dong220(cells: MealCell[]): GeneralizedMeals[] {
   const gapStew = "220동식당 값찌개";
   return sectionedOptionalPrice(
     cells,
-    (section) => new Map([
-      ["경성돈카츠", "220동식당 경성 돈카츠"],
-      ["바비든든", "220동식당 바비든든"],
-      ["포포420", "220동식당 포포420"],
-      ["값찌개", gapStew],
-      ["키친101", "220동식당 키친101"],
-    ]).get(sectionKey(section)),
+    (section) =>
+      new Map([
+        ["경성돈카츠", "220동식당 경성 돈카츠"],
+        ["바비든든", "220동식당 바비든든"],
+        ["포포420", "220동식당 포포420"],
+        ["값찌개", gapStew],
+        ["키친101", "220동식당 키친101"],
+      ]).get(sectionKey(section)),
     (name, restaurant) => {
       const replaced = name
         .replaceAll("제육한접시 세트", "제육한접시")
@@ -377,7 +390,10 @@ const CAFETERIAS = new Map<string, Cafeteria>([
 ]);
 
 function cleanRestaurantName(raw: string): string {
-  return raw.replace(/\(.*?\)/g, "").replaceAll("*", "").trim();
+  return raw
+    .replace(/\(.*?\)/g, "")
+    .replaceAll("*", "")
+    .trim();
 }
 
 function mealTypeFromCell(cell: Cheerio<Element>): MealType | undefined {
@@ -422,17 +438,21 @@ export function buildSnucoPayloads(html: string, date: string): Payload[] {
 }
 
 export async function crawlSnuco(dates: string[]): Promise<Payload[]> {
-  const pages = await Promise.all(dates.map(async (date) => {
-    const url = `${BASE_URL}?date=${encodeURIComponent(date)}`;
-    try {
-      const html = await fetchText(url, {
-        userAgent: SNU_BROWSER_USER_AGENT,
-        insecureSnucoTls: true,
-      });
-      return buildSnucoPayloads(html, date);
-    } catch (error) {
-      throw new Error(`SNUCO ${date} failed: ${error instanceof Error ? error.message : String(error)}`);
-    }
-  }));
+  const pages = await Promise.all(
+    dates.map(async (date) => {
+      const url = `${BASE_URL}?date=${encodeURIComponent(date)}`;
+      try {
+        const html = await fetchText(url, {
+          userAgent: SNU_BROWSER_USER_AGENT,
+          insecureSnucoTls: true,
+        });
+        return buildSnucoPayloads(html, date);
+      } catch (error) {
+        throw new Error(
+          `SNUCO ${date} failed: ${error instanceof Error ? error.message : String(error)}`,
+        );
+      }
+    }),
+  );
   return pages.flat();
 }

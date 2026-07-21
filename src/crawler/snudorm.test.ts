@@ -25,7 +25,9 @@ test("SNUDORM README sample preserves service times and pending breakfast price"
     <footer>개인정보처리방침</footer>
   `;
   const payloads = buildSnudormPayloads(html, "2026-05-15");
-  const breakfast = payloads.find(({ restaurant, type }) => restaurant === "아워홈" && type === "BR");
+  const breakfast = payloads.find(
+    ({ restaurant, type }) => restaurant === "아워홈" && type === "BR",
+  );
   assert.equal(breakfast?.meals.length, 1);
   assert.equal(breakfast?.meals[0].price, 5000);
   assert.ok(breakfast?.meals[0].menus.includes("토스트"));
@@ -37,7 +39,9 @@ test("SNUDORM README sample preserves service times and pending breakfast price"
   const dinner = payloads.find(({ restaurant, type }) => restaurant === "아워홈" && type === "DN");
   assert.deepEqual(dinner?.meals[0].menus, ["새우볶음밥", "짜장소스", "제육땅콩강정"]);
 
-  const coopLunch = payloads.find(({ restaurant, type }) => restaurant === "생협기숙사" && type === "LU");
+  const coopLunch = payloads.find(
+    ({ restaurant, type }) => restaurant === "생협기숙사" && type === "LU",
+  );
   assert.deepEqual(coopLunch?.meals[0], {
     price: 6000,
     no_meat: true,

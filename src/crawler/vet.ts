@@ -20,21 +20,28 @@ function descendantText(element: Cheerio<Element>): string[] {
     if (node.type === "text") parts.push(node.data ?? "");
     else node.childNodes?.forEach(visit);
   };
-  element.contents().toArray().forEach((node) => visit(node as TextNodeLike));
+  element
+    .contents()
+    .toArray()
+    .forEach((node) => visit(node as TextNodeLike));
   return parts;
 }
 
 function strippedText(element: Cheerio<Element>): string {
-  return descendantText(element).map((part) => part.trim()).filter(Boolean).join(" ");
+  return descendantText(element)
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .join(" ");
 }
 
 function validDate(year: number, month: number, day: number): string | undefined {
   const date = new Date(Date.UTC(year, month - 1, day));
   if (
-    date.getUTCFullYear() !== year
-    || date.getUTCMonth() !== month - 1
-    || date.getUTCDate() !== day
-  ) return undefined;
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  )
+    return undefined;
   return date.toISOString().slice(0, 10);
 }
 
@@ -52,10 +59,17 @@ export function parseVetDate(dateText: string, today: string): string | undefine
 }
 
 function buildMeal(menuText: string): Meal | undefined {
-  const normalized = menuText.replace(/\s+/g, " ").replace(/^[\s:：-]+/, "").trim();
+  const normalized = menuText
+    .replace(/\s+/g, " ")
+    .replace(/^[\s:：-]+/, "")
+    .trim();
   if (!normalized || normalized === "없음" || normalized.includes("휴무")) return undefined;
   const hasNoMeat = /\(#\)|\[#\]|#/.test(normalized);
-  const cleanMenu = normalized.replaceAll("(#)", "").replaceAll("[#]", "").replaceAll("#", "").trim();
+  const cleanMenu = normalized
+    .replaceAll("(#)", "")
+    .replaceAll("[#]", "")
+    .replaceAll("#", "")
+    .trim();
   if (!cleanMenu) return undefined;
   return { price: null, no_meat: hasNoMeat, menus: [cleanMenu] };
 }
@@ -72,7 +86,10 @@ function extractDinnerText($: CheerioAPI): string {
     }
     return node.childNodes?.some(visit) ?? false;
   };
-  $.root().contents().toArray().some((node) => visit(node as TextNodeLike));
+  $.root()
+    .contents()
+    .toArray()
+    .some((node) => visit(node as TextNodeLike));
   return dinner;
 }
 

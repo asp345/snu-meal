@@ -45,8 +45,10 @@ function validateRegistry(): void {
   const codes = new Set<string>();
   const names = new Set<string>();
   for (const restaurant of RESTAURANTS) {
-    if (codes.has(restaurant.code)) throw new Error(`Duplicate restaurant code: ${restaurant.code}`);
-    if (names.has(restaurant.name)) throw new Error(`Duplicate restaurant name: ${restaurant.name}`);
+    if (codes.has(restaurant.code))
+      throw new Error(`Duplicate restaurant code: ${restaurant.code}`);
+    if (names.has(restaurant.name))
+      throw new Error(`Duplicate restaurant name: ${restaurant.name}`);
     codes.add(restaurant.code);
     names.add(restaurant.name);
   }
@@ -70,22 +72,25 @@ function validatePayload(payload: Payload, slots: Set<string>): void {
       throw new Error(`Empty menu name: ${payload.restaurant}, ${payload.date}, ${payload.type}`);
     }
     if (meal.price !== null && (!Number.isSafeInteger(meal.price) || meal.price < 0)) {
-      throw new Error(`Invalid meal price: ${payload.restaurant}, ${payload.date}, ${payload.type}`);
+      throw new Error(
+        `Invalid meal price: ${payload.restaurant}, ${payload.date}, ${payload.type}`,
+      );
     }
   }
 
   const slot = `${payload.restaurant}\u0000${payload.date}\u0000${payload.type}`;
   if (slots.has(slot)) {
-    throw new Error(`Duplicate meal payload slot: ${payload.restaurant}, ${payload.date}, ${payload.type}`);
+    throw new Error(
+      `Duplicate meal payload slot: ${payload.restaurant}, ${payload.date}, ${payload.type}`,
+    );
   }
   slots.add(slot);
 }
 
 function buildDateMenu(date: string, payloads: Payload[]): DateMenu {
-  const bySlot = new Map(payloads.map((payload) => [
-    `${payload.restaurant}\u0000${payload.type}`,
-    payload,
-  ]));
+  const bySlot = new Map(
+    payloads.map((payload) => [`${payload.restaurant}\u0000${payload.type}`, payload]),
+  );
 
   const types = MEAL_TYPES.flatMap((type) => {
     const buildings = new Map<string, ExportBuilding>();
@@ -145,10 +150,9 @@ export function buildExportData(result: CrawlResult, generatedAt = new Date()): 
       schema_version: 1,
       restaurants: RESTAURANTS,
     },
-    menus: new Map(availableDates.map((date) => [
-      date,
-      buildDateMenu(date, payloadsByDate.get(date) ?? []),
-    ])),
+    menus: new Map(
+      availableDates.map((date) => [date, buildDateMenu(date, payloadsByDate.get(date) ?? [])]),
+    ),
   };
 }
 
@@ -170,7 +174,7 @@ async function writeExport(outputPath: string, data: ExportData): Promise<void> 
       writeFile(join(temporary, "manifest.json"), json(data.manifest)),
       writeFile(join(temporary, "restaurants.json"), json(data.restaurants)),
       ...[...data.menus].map(([date, menu]) =>
-        writeFile(join(temporary, "menus", `${date}.json`), json(menu))
+        writeFile(join(temporary, "menus", `${date}.json`), json(menu)),
       ),
     ]);
 
@@ -210,15 +214,15 @@ async function main(): Promise<void> {
   const data = buildExportData(result);
   await writeExport(output, data);
   console.log(
-    `Exported ${data.manifest.available_dates.length} dates to ${resolve(output)} `
-    + `(snuco=${result.sourceCounts.snuco}, snudorm=${result.sourceCounts.snudorm}, vet=${result.sourceCounts.vet})`,
+    `Exported ${data.manifest.available_dates.length} dates to ${resolve(output)} ` +
+      `(snuco=${result.sourceCounts.snuco}, snudorm=${result.sourceCounts.snudorm}, vet=${result.sourceCounts.vet})`,
   );
 }
 
 const entryPoint = process.argv[1] ? pathToFileURL(resolve(process.argv[1])).href : "";
 if (import.meta.url === entryPoint) {
   main().catch((error) => {
-    console.error(error instanceof Error ? error.stack ?? error.message : String(error));
+    console.error(error instanceof Error ? (error.stack ?? error.message) : String(error));
     process.exitCode = 1;
   });
 }

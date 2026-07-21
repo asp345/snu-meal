@@ -10,7 +10,8 @@
   --lime: #c8e36c;
   --coral: #ed6a4b;
   --shadow: 0 16px 38px rgba(24, 50, 40, 0.08);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
   font-synthesis: none;
 }
 
@@ -27,11 +28,11 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
   color: var(--ink);
   background:
     linear-gradient(rgba(22, 63, 50, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(22, 63, 50, 0.035) 1px, transparent 1px),
-    var(--paper);
+    linear-gradient(90deg, rgba(22, 63, 50, 0.035) 1px, transparent 1px), var(--paper);
   background-size: 32px 32px;
 }
 
@@ -260,7 +261,10 @@ main {
   background: #fff;
   cursor: pointer;
   scroll-snap-align: center;
-  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
 }
 
 .date-option:hover {
@@ -476,7 +480,9 @@ main {
 }
 
 .building-name {
+  min-width: 0;
   margin: 0;
+  overflow-wrap: anywhere;
   font-size: 1rem;
   letter-spacing: -0.025em;
 }
@@ -496,7 +502,9 @@ main {
 }
 
 .restaurant-name {
+  min-width: 0;
   margin: 0;
+  overflow-wrap: anywhere;
   color: var(--forest);
   font-size: 0.9rem;
   letter-spacing: -0.015em;
@@ -541,8 +549,12 @@ main {
 }
 
 .menu-name {
-  font-size: 0.81rem;
-  line-height: 1.5;
+  color: var(--ink);
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
   word-break: keep-all;
 }
 
@@ -684,7 +696,9 @@ noscript {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 760px) {
@@ -770,6 +784,29 @@ noscript {
     grid-template-columns: 1fr;
   }
 
+  .building-heading {
+    align-items: flex-start;
+    padding: 13px 14px;
+  }
+
+  .building-name {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .restaurant-card {
+    padding: 15px;
+  }
+
+  .restaurant-heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .menu-name {
+    font-size: 0.98rem;
+  }
+
   .meal {
     flex-direction: column;
     gap: 7px;
@@ -787,6 +824,32 @@ noscript {
   .site-footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 420px) {
+  .header-inner,
+  main,
+  .site-footer {
+    width: calc(100% - 24px);
+  }
+
+  .header-inner {
+    min-height: 274px;
+    padding-top: 32px;
+  }
+
+  .brand-block h1 {
+    font-size: 2.85rem;
+  }
+
+  .selection-panel {
+    padding-inline: 13px;
+  }
+
+  .building-number {
+    min-width: 44px;
+    padding-inline: 6px;
   }
 }
 

@@ -6,9 +6,26 @@ import { fetchText, SNU_BROWSER_USER_AGENT } from "./http.js";
 const BASE_URL = "https://snudorm.snu.ac.kr/foodmenu/";
 const SECTION_END_MARKER = "개인정보처리방침";
 const BLOCK_TAGS = new Set([
-  "div", "p", "li", "ul", "ol", "section", "article",
-  "table", "thead", "tbody", "tfoot", "tr", "td", "th",
-  "h1", "h2", "h3", "h4", "h5", "h6",
+  "div",
+  "p",
+  "li",
+  "ul",
+  "ol",
+  "section",
+  "article",
+  "table",
+  "thead",
+  "tbody",
+  "tfoot",
+  "tr",
+  "td",
+  "th",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
 ]);
 const TIME_RE = /^※\s*운영시간\s*:\s*(\d{1,2}:\d{2}~\d{1,2}:\d{2})$/;
 const PRICE_RE = /^(.+?)\s*[:;：；]\s*([\d,]+원)$/;
@@ -37,17 +54,20 @@ const CAFETERIAS: DormCafeteria[] = [
 
 export function snudormHtmlToLines(html: string): string[] {
   const parts: string[] = [];
-  const parser = new Parser({
-    onopentag(name) {
-      if (BLOCK_TAGS.has(name.toLowerCase()) || name.toLowerCase() === "br") parts.push("\n");
+  const parser = new Parser(
+    {
+      onopentag(name) {
+        if (BLOCK_TAGS.has(name.toLowerCase()) || name.toLowerCase() === "br") parts.push("\n");
+      },
+      ontext(text) {
+        parts.push(text);
+      },
+      onclosetag(name) {
+        if (BLOCK_TAGS.has(name.toLowerCase())) parts.push("\n");
+      },
     },
-    ontext(text) {
-      parts.push(text);
-    },
-    onclosetag(name) {
-      if (BLOCK_TAGS.has(name.toLowerCase())) parts.push("\n");
-    },
-  }, { decodeEntities: true });
+    { decodeEntities: true },
+  );
   parser.write(html);
   parser.end();
 
@@ -93,17 +113,10 @@ function mealTypeFromServiceTime(serviceTime: string): MealType | undefined {
 function parseMenuLine(line: string): [string, number | null] {
   const match = PRICE_RE.exec(line);
   if (!match) return [line, null];
-  return [
-    match[1].trim(),
-    Number.parseInt(match[2].replaceAll(",", "").replaceAll("원", ""), 10),
-  ];
+  return [match[1].trim(), Number.parseInt(match[2].replaceAll(",", "").replaceAll("원", ""), 10)];
 }
 
-function normalizeMenuNames(
-  text: string,
-  type: MealType,
-  cafeteria: DormCafeteria,
-): string[] {
+function normalizeMenuNames(text: string, type: MealType, cafeteria: DormCafeteria): string[] {
   return text
     .replaceAll("(잇템)", "")
     .replaceAll("(#)", "")
@@ -116,11 +129,7 @@ function normalizeMenuNames(
     .filter((name) => type !== "BR" || !cafeteria.excludedBreakfast.has(name));
 }
 
-function parseMenuLines(
-  lines: string[],
-  type: MealType,
-  cafeteria: DormCafeteria,
-): Meal[] {
+function parseMenuLines(lines: string[], type: MealType, cafeteria: DormCafeteria): Meal[] {
   const meals: Meal[] = [];
   let pendingPrice: number | null = null;
   for (const rawLine of lines) {
@@ -143,7 +152,10 @@ function parseMenuLines(
   return meals;
 }
 
-function generalizeDormBlock(cafeteria: DormCafeteria, lines: string[]): Array<{
+function generalizeDormBlock(
+  cafeteria: DormCafeteria,
+  lines: string[],
+): Array<{
   type: MealType;
   meals: Meal[];
 }> {
@@ -181,14 +193,18 @@ export function buildSnudormPayloads(html: string, date: string): Payload[] {
 }
 
 export async function crawlSnudorm(dates: string[]): Promise<Payload[]> {
-  const pages = await Promise.all(dates.map(async (date) => {
-    const url = `${BASE_URL}?date=${encodeURIComponent(date)}`;
-    try {
-      const html = await fetchText(url, { userAgent: SNU_BROWSER_USER_AGENT });
-      return buildSnudormPayloads(html, date);
-    } catch (error) {
-      throw new Error(`SNUDORM ${date} failed: ${error instanceof Error ? error.message : String(error)}`);
-    }
-  }));
+  const pages = await Promise.all(
+    dates.map(async (date) => {
+      const url = `${BASE_URL}?date=${encodeURIComponent(date)}`;
+      try {
+        const html = await fetchText(url, { userAgent: SNU_BROWSER_USER_AGENT });
+        return buildSnudormPayloads(html, date);
+      } catch (error) {
+        throw new Error(
+          `SNUDORM ${date} failed: ${error instanceof Error ? error.message : String(error)}`,
+        );
+      }
+    }),
+  );
   return pages.flat();
 }

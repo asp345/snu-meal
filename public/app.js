@@ -5,11 +5,6 @@ var TYPE_LABELS = {
   LU: "\uC810\uC2EC",
   DN: "\uC800\uB141"
 };
-var SOURCE_LABELS = {
-  snuco: "\uC0DD\uD611",
-  snudorm: "\uC0DD\uD65C\uAD00",
-  vet: "\uC218\uC758\uB300"
-};
 var PRICE_FORMATTER = new Intl.NumberFormat("ko-KR", {
   style: "currency",
   currency: "KRW",
@@ -27,7 +22,6 @@ var DATE_SHORT_FORMATTER = new Intl.DateTimeFormat("ko-KR", {
 var WEEKDAY_FORMATTER = new Intl.DateTimeFormat("ko-KR", { weekday: "short" });
 var app = requireElement("app");
 var statusLine = requireElement("data-status");
-var sourceList = requireElement("source-list");
 var datePicker = requireElement("date-picker");
 var typePicker = requireElement("type-picker");
 var fixedToggle = requireElement("fixed-toggle");
@@ -128,16 +122,6 @@ function renderManifest() {
     hour: "2-digit",
     minute: "2-digit"
   }).format(generated)} \uC5C5\uB370\uC774\uD2B8`;
-  sourceList.replaceChildren();
-  for (const key of ["snuco", "snudorm", "vet"]) {
-    const item = createElement("li", "source-item");
-    item.append(
-      createElement("span", "source-dot"),
-      createElement("span", "source-name", SOURCE_LABELS[key]),
-      createElement("strong", "source-count", String(manifest.sources[key]))
-    );
-    sourceList.append(item);
-  }
 }
 function renderDatePicker() {
   if (!manifest) return;
@@ -152,7 +136,11 @@ function renderDatePicker() {
     button.setAttribute("aria-pressed", String(date === selectedDate));
     button.setAttribute("aria-label", `${DATE_HEADING_FORMATTER.format(value)} \uBA54\uB274`);
     button.append(
-      createElement("span", "date-weekday", date === today ? "\uC624\uB298" : WEEKDAY_FORMATTER.format(value)),
+      createElement(
+        "span",
+        "date-weekday",
+        date === today ? "\uC624\uB298" : WEEKDAY_FORMATTER.format(value)
+      ),
       createElement("span", "date-number", DATE_SHORT_FORMATTER.format(value))
     );
     button.addEventListener("click", () => {
@@ -278,7 +266,9 @@ function renderMenu() {
   }
   const buildings = section.buildings.map((building) => ({
     ...building,
-    restaurants: building.restaurants.filter((restaurant) => includeFixed || !restaurant.fixed_menu)
+    restaurants: building.restaurants.filter(
+      (restaurant) => includeFixed || !restaurant.fixed_menu
+    )
   })).filter((building) => building.restaurants.length > 0);
   if (buildings.length === 0) {
     renderEmpty(

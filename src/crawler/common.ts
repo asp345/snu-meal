@@ -54,20 +54,13 @@ export function sectionKey(section: string): string {
   return section.trim().replace(/\s+/g, "");
 }
 
-export function pushMeal(
-  groups: Map<string, Meal[]>,
-  restaurant: string,
-  meal: Meal,
-): void {
+export function pushMeal(groups: Map<string, Meal[]>, restaurant: string, meal: Meal): void {
   const meals = groups.get(restaurant);
   if (meals) meals.push(meal);
   else groups.set(restaurant, [meal]);
 }
 
-export function groupedPayloads(
-  groups: Map<string, Meal[]>,
-  type: MealType,
-): GeneralizedMeals[] {
+export function groupedPayloads(groups: Map<string, Meal[]>, type: MealType): GeneralizedMeals[] {
   return [...groups].map(([restaurant, meals]) => ({ restaurant, type, meals }));
 }
 
@@ -79,7 +72,10 @@ export function expandOrOptionMeals(meals: Meal[]): Meal[] {
     let optionSets: string[][] = [[]];
     let hasOrOption = false;
     for (const menu of meal.menus) {
-      const options = menu.split(separator).map((part) => part.trim()).filter(Boolean);
+      const options = menu
+        .split(separator)
+        .map((part) => part.trim())
+        .filter(Boolean);
       if (options.length <= 1) {
         optionSets.forEach((set) => set.push(menu));
         continue;

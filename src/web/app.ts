@@ -51,11 +51,6 @@ const TYPE_LABELS: Record<MealType, string> = {
   LU: "점심",
   DN: "저녁",
 };
-const SOURCE_LABELS: Record<keyof Manifest["sources"], string> = {
-  snuco: "생협",
-  snudorm: "생활관",
-  vet: "수의대",
-};
 const PRICE_FORMATTER = new Intl.NumberFormat("ko-KR", {
   style: "currency",
   currency: "KRW",
@@ -74,7 +69,6 @@ const WEEKDAY_FORMATTER = new Intl.DateTimeFormat("ko-KR", { weekday: "short" })
 
 const app = requireElement<HTMLElement>("app");
 const statusLine = requireElement<HTMLElement>("data-status");
-const sourceList = requireElement<HTMLElement>("source-list");
 const datePicker = requireElement<HTMLElement>("date-picker");
 const typePicker = requireElement<HTMLElement>("type-picker");
 const fixedToggle = requireElement<HTMLInputElement>("fixed-toggle");
@@ -167,11 +161,12 @@ function parseQueryState(availableDates: string[]): void {
   const dates = [...availableDates].sort();
   const today = localIsoDate();
 
-  selectedDate = queryDate && dates.includes(queryDate)
-    ? queryDate
-    : dates.includes(today)
-      ? today
-      : dates.at(-1) ?? "";
+  selectedDate =
+    queryDate && dates.includes(queryDate)
+      ? queryDate
+      : dates.includes(today)
+        ? today
+        : (dates.at(-1) ?? "");
   if (queryType === "BR" || queryType === "LU" || queryType === "DN") {
     selectedType = queryType;
   }
@@ -199,17 +194,6 @@ function renderManifest(): void {
         hour: "2-digit",
         minute: "2-digit",
       }).format(generated)} 업데이트`;
-
-  sourceList.replaceChildren();
-  for (const key of ["snuco", "snudorm", "vet"] as const) {
-    const item = createElement("li", "source-item");
-    item.append(
-      createElement("span", "source-dot"),
-      createElement("span", "source-name", SOURCE_LABELS[key]),
-      createElement("strong", "source-count", String(manifest.sources[key])),
-    );
-    sourceList.append(item);
-  }
 }
 
 function renderDatePicker(): void {
@@ -226,7 +210,11 @@ function renderDatePicker(): void {
     button.setAttribute("aria-pressed", String(date === selectedDate));
     button.setAttribute("aria-label", `${DATE_HEADING_FORMATTER.format(value)} 메뉴`);
     button.append(
-      createElement("span", "date-weekday", date === today ? "오늘" : WEEKDAY_FORMATTER.format(value)),
+      createElement(
+        "span",
+        "date-weekday",
+        date === today ? "오늘" : WEEKDAY_FORMATTER.format(value),
+      ),
       createElement("span", "date-number", DATE_SHORT_FORMATTER.format(value)),
     );
     button.addEventListener("click", () => {
@@ -366,7 +354,9 @@ function renderMenu(): void {
   const buildings = section.buildings
     .map((building) => ({
       ...building,
-      restaurants: building.restaurants.filter((restaurant) => includeFixed || !restaurant.fixed_menu),
+      restaurants: building.restaurants.filter(
+        (restaurant) => includeFixed || !restaurant.fixed_menu,
+      ),
     }))
     .filter((building) => building.restaurants.length > 0);
 
