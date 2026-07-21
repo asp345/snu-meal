@@ -338,11 +338,14 @@ function renderMeal(meal: Meal): HTMLElement {
   return item;
 }
 
-function renderRestaurant(restaurant: Restaurant): HTMLElement {
+function renderRestaurant(restaurant: Restaurant, hideHeading = false): HTMLElement {
   const article = createElement("article", "restaurant-card");
-  const heading = createElement("div", "restaurant-heading");
-  heading.append(createElement("h3", "restaurant-name", restaurant.name));
-  if (restaurant.fixed_menu) heading.append(createElement("span", "fixed-badge", "상시 메뉴"));
+  if (!hideHeading) {
+    const heading = createElement("div", "restaurant-heading");
+    heading.append(createElement("h3", "restaurant-name", restaurant.name));
+    if (restaurant.fixed_menu) heading.append(createElement("span", "fixed-badge", "상시 메뉴"));
+    article.append(heading);
+  }
 
   const meals = createElement("ul", "meal-list");
   if (restaurant.meals.length === 0) {
@@ -350,7 +353,7 @@ function renderRestaurant(restaurant: Restaurant): HTMLElement {
   } else {
     for (const meal of restaurant.meals) meals.append(renderMeal(meal));
   }
-  article.append(heading, meals);
+  article.append(meals);
   return article;
 }
 
@@ -359,11 +362,19 @@ function renderVenueCard(buildingNumber: string, venue: Venue): HTMLElement {
   const heading = createElement("header", "building-heading");
   const title = createElement("h2", "building-title");
   title.append(createElement("span", "building-number", buildingNumber));
-  if (venue.name) title.append(createElement("span", "building-name", venue.name));
+
+  const standalone = venue.name === null && venue.restaurants.length === 1;
+  const titleLabel = venue.name ?? (standalone ? venue.restaurants[0].name : null);
+  if (titleLabel) title.append(createElement("span", "building-name", titleLabel));
+  if (standalone && venue.restaurants[0].fixed_menu) {
+    title.append(createElement("span", "fixed-badge", "상시 메뉴"));
+  }
   heading.append(title);
 
   const restaurants = createElement("div", "restaurant-list");
-  for (const restaurant of venue.restaurants) restaurants.append(renderRestaurant(restaurant));
+  for (const restaurant of venue.restaurants) {
+    restaurants.append(renderRestaurant(restaurant, standalone));
+  }
   section.append(heading, restaurants);
   return section;
 }

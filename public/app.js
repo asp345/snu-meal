@@ -240,18 +240,21 @@ function renderMeal(meal) {
   item.append(menuNames, details);
   return item;
 }
-function renderRestaurant(restaurant) {
+function renderRestaurant(restaurant, hideHeading = false) {
   const article = createElement("article", "restaurant-card");
-  const heading = createElement("div", "restaurant-heading");
-  heading.append(createElement("h3", "restaurant-name", restaurant.name));
-  if (restaurant.fixed_menu) heading.append(createElement("span", "fixed-badge", "\uC0C1\uC2DC \uBA54\uB274"));
+  if (!hideHeading) {
+    const heading = createElement("div", "restaurant-heading");
+    heading.append(createElement("h3", "restaurant-name", restaurant.name));
+    if (restaurant.fixed_menu) heading.append(createElement("span", "fixed-badge", "\uC0C1\uC2DC \uBA54\uB274"));
+    article.append(heading);
+  }
   const meals = createElement("ul", "meal-list");
   if (restaurant.meals.length === 0) {
     meals.append(createElement("li", "restaurant-empty", "\uB4F1\uB85D\uB41C \uBA54\uB274\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."));
   } else {
     for (const meal of restaurant.meals) meals.append(renderMeal(meal));
   }
-  article.append(heading, meals);
+  article.append(meals);
   return article;
 }
 function renderVenueCard(buildingNumber, venue) {
@@ -259,10 +262,17 @@ function renderVenueCard(buildingNumber, venue) {
   const heading = createElement("header", "building-heading");
   const title = createElement("h2", "building-title");
   title.append(createElement("span", "building-number", buildingNumber));
-  if (venue.name) title.append(createElement("span", "building-name", venue.name));
+  const standalone = venue.name === null && venue.restaurants.length === 1;
+  const titleLabel = venue.name ?? (standalone ? venue.restaurants[0].name : null);
+  if (titleLabel) title.append(createElement("span", "building-name", titleLabel));
+  if (standalone && venue.restaurants[0].fixed_menu) {
+    title.append(createElement("span", "fixed-badge", "\uC0C1\uC2DC \uBA54\uB274"));
+  }
   heading.append(title);
   const restaurants = createElement("div", "restaurant-list");
-  for (const restaurant of venue.restaurants) restaurants.append(renderRestaurant(restaurant));
+  for (const restaurant of venue.restaurants) {
+    restaurants.append(renderRestaurant(restaurant, standalone));
+  }
   section.append(heading, restaurants);
   return section;
 }
