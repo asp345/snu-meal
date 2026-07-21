@@ -120,7 +120,6 @@ export function renderError(elements: Elements, message: string, retry: () => vo
   button.type = "button";
   button.addEventListener("click", retry);
   state.append(
-    createElement("span", "state-code", "연결 오류"),
     createElement("h2", "state-title", "메뉴를 가져오지 못했습니다"),
     createElement("p", "state-copy", message),
     button,
@@ -131,7 +130,6 @@ export function renderError(elements: Elements, message: string, retry: () => vo
 export function renderEmpty(elements: Elements, title: string, description: string): void {
   const state = createElement("section", "state-panel empty-state");
   state.append(
-    createElement("span", "empty-symbol", "—"),
     createElement("h2", "state-title", title),
     createElement("p", "state-copy", description),
   );

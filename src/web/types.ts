@@ -1,7 +1,7 @@
 export type MealType = "BR" | "LU" | "DN";
 
 export interface Manifest {
-  schema_version: 1 | 2;
+  schema_version: 2;
   generated_at: string;
   available_dates: string[];
   sources: {
@@ -34,12 +34,6 @@ export interface Building {
   venues: Venue[];
 }
 
-export interface LegacyBuilding {
-  building_number: string;
-  building_name: string | null;
-  restaurants: Restaurant[];
-}
-
 export interface MealSection {
   type: MealType;
   buildings: Building[];
@@ -48,14 +42,6 @@ export interface MealSection {
 export interface DateMenu {
   date: string;
   types: MealSection[];
-}
-
-export interface LegacyDateMenu {
-  date: string;
-  types: Array<{
-    type: MealType;
-    buildings: LegacyBuilding[];
-  }>;
 }
 
 export interface AppState {

@@ -12,7 +12,6 @@
   --blue-900: #0b2341;
   --blue-800: #123a66;
   --blue-700: #174b82;
-  --blue-100: #e8eef6;
   --blue-50: #f4f7fb;
   --ink: #14213a;
   --muted: #647086;
@@ -567,15 +566,6 @@ main {
   border-top-color: var(--blue-800);
   border-radius: 50%;
   animation: spin 800ms linear infinite;
-}
-
-.state-code,
-.empty-symbol {
-  margin-bottom: 10px;
-  color: var(--gold);
-  font-size: 0.72rem;
-  font-weight: 850;
-  letter-spacing: 0.14em;
 }
 
 .state-title {

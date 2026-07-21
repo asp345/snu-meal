@@ -7,45 +7,27 @@ async function fetchJson(url) {
 }
 async function resolveDataBase() {
   if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return "./data";
-  try {
-    const commit = await fetchJson(
-      `https://api.github.com/repos/${REPOSITORY}/commits/data`
-    );
-    if (typeof commit.sha !== "string" || !/^[0-9a-f]{40}$/i.test(commit.sha)) {
-      throw new Error("\uC62C\uBC14\uB978 \uB370\uC774\uD130 \uCEE4\uBC0B\uC744 \uCC3E\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4.");
-    }
-    return `https://raw.githubusercontent.com/${REPOSITORY}/${commit.sha}`;
-  } catch {
-    return `https://raw.githubusercontent.com/${REPOSITORY}/data?t=${Date.now()}`;
+  const commit = await fetchJson(
+    `https://api.github.com/repos/${REPOSITORY}/commits/data`
+  );
+  if (typeof commit.sha !== "string" || !/^[0-9a-f]{40}$/i.test(commit.sha)) {
+    throw new Error("\uC62C\uBC14\uB978 \uB370\uC774\uD130 \uCEE4\uBC0B\uC744 \uCC3E\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4.");
   }
-}
-function normalizeMenu(menu) {
-  return {
-    date: menu.date,
-    types: menu.types.map((section) => ({
-      type: section.type,
-      buildings: section.buildings.map(
-        (building) => "venues" in building ? building : {
-          building_number: building.building_number,
-          venues: [{ name: null, restaurants: building.restaurants }]
-        }
-      )
-    }))
-  };
+  return `https://raw.githubusercontent.com/${REPOSITORY}/${commit.sha}`;
 }
 async function loadManifest(dataBase) {
   const manifest = await fetchJson(`${dataBase}/manifest.json`);
-  if (![1, 2].includes(manifest.schema_version) || !Array.isArray(manifest.available_dates)) {
+  if (manifest.schema_version !== 2 || !Array.isArray(manifest.available_dates)) {
     throw new Error("\uC9C0\uC6D0\uD558\uC9C0 \uC54A\uB294 \uB370\uC774\uD130 \uD615\uC2DD\uC785\uB2C8\uB2E4.");
   }
   return manifest;
 }
 async function loadMenu(dataBase, date) {
-  const response = await fetchJson(`${dataBase}/menus/${date}.json`);
-  if (response.date !== date || !Array.isArray(response.types)) {
+  const menu = await fetchJson(`${dataBase}/menus/${date}.json`);
+  if (menu.date !== date || !Array.isArray(menu.types)) {
     throw new Error("\uBA54\uB274 \uB370\uC774\uD130 \uD615\uC2DD\uC774 \uC62C\uBC14\uB974\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.");
   }
-  return normalizeMenu(response);
+  return menu;
 }
 
 // src/web/dom.ts
@@ -217,7 +199,6 @@ function renderError(elements2, message, retry) {
   button.type = "button";
   button.addEventListener("click", retry);
   state2.append(
-    createElement("span", "state-code", "\uC5F0\uACB0 \uC624\uB958"),
     createElement("h2", "state-title", "\uBA54\uB274\uB97C \uAC00\uC838\uC624\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4"),
     createElement("p", "state-copy", message),
     button
@@ -227,7 +208,6 @@ function renderError(elements2, message, retry) {
 function renderEmpty(elements2, title, description) {
   const state2 = createElement("section", "state-panel empty-state");
   state2.append(
-    createElement("span", "empty-symbol", "\u2014"),
     createElement("h2", "state-title", title),
     createElement("p", "state-copy", description)
   );
