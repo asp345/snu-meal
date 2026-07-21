@@ -43,8 +43,8 @@ test("export data is grouped in meal, building, and registry order", () => {
       restaurants: venue.restaurants.map((restaurant) => restaurant.name),
     })),
     [
-      { name: "두레미담", restaurants: ["식당"] },
-      { name: "3식당", restaurants: ["일반"] },
+      { name: "두레미담 (5층)", restaurants: ["식당"] },
+      { name: "3식당 (3층)", restaurants: ["일반"] },
     ],
   );
 });
@@ -89,15 +89,15 @@ test("export separates venues and keeps their counters together", () => {
       }));
 
   assert.deepEqual(venues("75-1동"), [
-    { name: "두레미담", restaurants: ["식당", "셀프코너"] },
-    { name: "3식당", restaurants: ["일반", "든든한끼샐러드코너"] },
+    { name: "두레미담 (5층)", restaurants: ["식당", "셀프코너"] },
+    { name: "3식당 (3층)", restaurants: ["일반", "든든한끼샐러드코너"] },
     {
-      name: "4층 푸드코트",
+      name: "푸드코트 (4층)",
       restaurants: ["서가앤쿡", "토끼정", "숨쉬는순두부", "이공오 돈까스와 우동"],
     },
   ]);
   assert.deepEqual(venues("301동"), [
-    { name: "301동식당", restaurants: ["일반", "천원의아침밥", "TAKE-OUT"] },
+    { name: "301동식당 (B1층)", restaurants: ["일반", "천원의아침밥", "TAKE-OUT"] },
     { name: "교직원전용식당", restaurants: ["1층"] },
   ]);
   assert.deepEqual(venues("220동"), [
