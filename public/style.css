@@ -42,9 +42,7 @@ body {
   min-height: 100vh;
   margin: 0;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 18% 0%, rgba(23, 75, 130, 0.38), transparent 30rem),
-    linear-gradient(180deg, var(--blue-900) 0 19.5rem, var(--blue-50) 19.5rem);
+  background: linear-gradient(180deg, var(--blue-900) 0 12.5rem, var(--blue-50) 12.5rem);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -75,11 +73,11 @@ input:focus-visible {
 .header-inner {
   display: flex;
   width: min(1180px, calc(100% - 48px));
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  gap: 32px;
+  gap: 24px;
   margin: 0 auto;
-  padding: 54px 0 52px;
+  padding: 27px 0 30px;
 }
 
 .brand-block {
@@ -87,30 +85,19 @@ input:focus-visible {
 }
 
 .brand-kicker {
-  margin: 0 0 12px;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
+  margin: 0 0 5px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
 }
 
 .brand-block h1 {
   margin: 0;
-  font-size: clamp(2.3rem, 5vw, 4.1rem);
-  font-weight: 850;
-  letter-spacing: -0.06em;
-  line-height: 1;
-}
-
-.brand-block h1 span {
-  color: var(--gold);
-}
-
-.brand-description {
-  max-width: 32rem;
-  margin: 14px 0 0;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 1rem;
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
 }
 
 .data-note {
@@ -628,25 +615,18 @@ noscript {
 
 @media (max-width: 780px) {
   body {
-    background:
-      radial-gradient(circle at 15% 0%, rgba(23, 75, 130, 0.42), transparent 20rem),
-      linear-gradient(180deg, var(--blue-900) 0 17.2rem, var(--blue-50) 17.2rem);
+    background: linear-gradient(180deg, var(--blue-900) 0 11rem, var(--blue-50) 11rem);
   }
 
   .header-inner {
     width: min(100% - 32px, 1180px);
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 18px;
-    padding: 36px 0 54px;
+    align-items: center;
+    gap: 14px;
+    padding: 23px 0 27px;
   }
 
   .brand-block h1 {
-    font-size: clamp(2.2rem, 12vw, 3.2rem);
-  }
-
-  .brand-description {
-    font-size: 0.91rem;
+    font-size: 1.38rem;
   }
 
   .data-note {
