@@ -169,11 +169,10 @@ function renderDatePicker() {
     datePicker.append(button);
   }
   requestAnimationFrame(() => {
-    datePicker.querySelector('[aria-pressed="true"]')?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "center"
-    });
+    const selected = datePicker.querySelector('[aria-pressed="true"]');
+    if (!selected) return;
+    const centeredLeft = selected.offsetLeft - (datePicker.clientWidth - selected.offsetWidth) / 2;
+    datePicker.scrollTo({ left: Math.max(0, centeredLeft), behavior: "smooth" });
   });
 }
 function renderTypePicker() {
