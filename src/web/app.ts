@@ -45,7 +45,7 @@ interface DataLocation {
   cacheBust: string;
 }
 
-const REPOSITORY = "wafflestudio/snu-meal";
+const REPOSITORY = "asp345/snu-meal";
 const TYPE_LABELS: Record<MealType, string> = {
   BR: "아침",
   LU: "점심",

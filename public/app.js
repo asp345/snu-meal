@@ -1,5 +1,5 @@
 // src/web/app.ts
-var REPOSITORY = "wafflestudio/snu-meal";
+var REPOSITORY = "asp345/snu-meal";
 var TYPE_LABELS = {
   BR: "\uC544\uCE68",
   LU: "\uC810\uC2EC",
