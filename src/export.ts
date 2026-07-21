@@ -13,10 +13,14 @@ interface ExportRestaurant {
   meals: Meal[];
 }
 
+interface ExportVenue {
+  name: string | null;
+  restaurants: ExportRestaurant[];
+}
+
 interface ExportBuilding {
   building_number: string;
-  building_name: string | null;
-  restaurants: ExportRestaurant[];
+  venues: ExportVenue[];
 }
 
 interface DateMenu {
@@ -29,13 +33,13 @@ interface DateMenu {
 
 export interface ExportData {
   manifest: {
-    schema_version: 1;
+    schema_version: 2;
     generated_at: string;
     available_dates: string[];
     sources: CrawlResult["sourceCounts"];
   };
   restaurants: {
-    schema_version: 1;
+    schema_version: 2;
     restaurants: typeof RESTAURANTS;
   };
   menus: Map<string, DateMenu>;
@@ -44,13 +48,38 @@ export interface ExportData {
 function validateRegistry(): void {
   const codes = new Set<string>();
   const names = new Set<string>();
+  const counterSlots = new Set<string>();
+  const buildingNames = new Map<string, string | null>();
   for (const restaurant of RESTAURANTS) {
     if (codes.has(restaurant.code))
       throw new Error(`Duplicate restaurant code: ${restaurant.code}`);
     if (names.has(restaurant.name))
       throw new Error(`Duplicate restaurant name: ${restaurant.name}`);
+    if (!restaurant.display_name.trim()) {
+      throw new Error(`Empty restaurant display name: ${restaurant.code}`);
+    }
+
+    const knownBuildingName = buildingNames.get(restaurant.building_number);
+    if (
+      buildingNames.has(restaurant.building_number) &&
+      knownBuildingName !== restaurant.building_name
+    ) {
+      throw new Error(`Conflicting building name: ${restaurant.building_number}`);
+    }
+    buildingNames.set(restaurant.building_number, restaurant.building_name);
+
+    const counterSlot = [
+      restaurant.building_number,
+      restaurant.venue_name ?? "",
+      restaurant.display_name,
+    ].join("\u0000");
+    if (counterSlots.has(counterSlot)) {
+      throw new Error(`Duplicate venue counter: ${restaurant.display_name}`);
+    }
+
     codes.add(restaurant.code);
     names.add(restaurant.name);
+    counterSlots.add(counterSlot);
   }
 }
 
@@ -93,29 +122,42 @@ function buildDateMenu(date: string, payloads: Payload[]): DateMenu {
   );
 
   const types = MEAL_TYPES.flatMap((type) => {
-    const buildings = new Map<string, ExportBuilding>();
+    const buildings = new Map<
+      string,
+      { building_number: string; venues: Map<string, ExportVenue> }
+    >();
     for (const restaurant of RESTAURANTS) {
       const payload = bySlot.get(`${restaurant.name}\u0000${type}`);
       if (!payload) continue;
 
-      const buildingKey = `${restaurant.building_number}\u0000${restaurant.building_name ?? ""}`;
-      let building = buildings.get(buildingKey);
+      let building = buildings.get(restaurant.building_number);
       if (!building) {
         building = {
           building_number: restaurant.building_number,
-          building_name: restaurant.building_name,
-          restaurants: [],
+          venues: new Map(),
         };
-        buildings.set(buildingKey, building);
+        buildings.set(restaurant.building_number, building);
       }
-      building.restaurants.push({
+
+      const venueKey = restaurant.venue_name ?? "";
+      let venue = building.venues.get(venueKey);
+      if (!venue) {
+        venue = { name: restaurant.venue_name, restaurants: [] };
+        building.venues.set(venueKey, venue);
+      }
+      venue.restaurants.push({
         code: restaurant.code,
-        name: restaurant.name,
+        name: restaurant.display_name,
         fixed_menu: restaurant.fixed_menu,
         meals: payload.meals,
       });
     }
-    return buildings.size ? [{ type, buildings: [...buildings.values()] }] : [];
+
+    const exportedBuildings = [...buildings.values()].map((building) => ({
+      building_number: building.building_number,
+      venues: [...building.venues.values()],
+    }));
+    return exportedBuildings.length ? [{ type, buildings: exportedBuildings }] : [];
   });
 
   return { date, types };
@@ -138,16 +180,18 @@ export function buildExportData(result: CrawlResult, generatedAt = new Date()): 
     else payloadsByDate.set(payload.date, [payload]);
   }
 
-  const availableDates = [...payloadsByDate.keys()].sort();
+  const availableDates = [...payloadsByDate.keys()].sort((left, right) =>
+    left.localeCompare(right),
+  );
   return {
     manifest: {
-      schema_version: 1,
+      schema_version: 2,
       generated_at: generatedAt.toISOString(),
       available_dates: availableDates,
       sources: result.sourceCounts,
     },
     restaurants: {
-      schema_version: 1,
+      schema_version: 2,
       restaurants: RESTAURANTS,
     },
     menus: new Map(

@@ -1,7 +1,7 @@
 type MealType = "BR" | "LU" | "DN";
 
 interface Manifest {
-  schema_version: 1;
+  schema_version: 1 | 2;
   generated_at: string;
   available_dates: string[];
   sources: {
@@ -24,7 +24,17 @@ interface Restaurant {
   meals: Meal[];
 }
 
+interface Venue {
+  name: string | null;
+  restaurants: Restaurant[];
+}
+
 interface Building {
+  building_number: string;
+  venues: Venue[];
+}
+
+interface LegacyBuilding {
   building_number: string;
   building_name: string | null;
   restaurants: Restaurant[];
@@ -38,6 +48,14 @@ interface MealSection {
 interface DateMenu {
   date: string;
   types: MealSection[];
+}
+
+interface LegacyDateMenu {
+  date: string;
+  types: Array<{
+    type: MealType;
+    buildings: LegacyBuilding[];
+  }>;
 }
 
 interface DataLocation {
@@ -130,6 +148,23 @@ async function fetchJson<T>(url: string): Promise<T> {
   return (await response.json()) as T;
 }
 
+function normalizeMenu(menu: DateMenu | LegacyDateMenu): DateMenu {
+  return {
+    date: menu.date,
+    types: menu.types.map((section) => ({
+      type: section.type,
+      buildings: section.buildings.map((building) =>
+        "venues" in building
+          ? building
+          : {
+              building_number: building.building_number,
+              venues: [{ name: null, restaurants: building.restaurants }],
+            },
+      ),
+    })),
+  };
+}
+
 async function resolveDataLocation(): Promise<DataLocation> {
   const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";
   if (isLocal) return { base: "./data", cacheBust: "" };
@@ -158,15 +193,12 @@ function parseQueryState(availableDates: string[]): void {
   const queryDate = params.get("date");
   const queryType = params.get("type");
   const queryFixed = params.get("fixed");
-  const dates = [...availableDates].sort();
+  const dates = [...availableDates].sort((left, right) => left.localeCompare(right));
   const today = localIsoDate();
 
-  selectedDate =
-    queryDate && dates.includes(queryDate)
-      ? queryDate
-      : dates.includes(today)
-        ? today
-        : (dates.at(-1) ?? "");
+  if (queryDate && dates.includes(queryDate)) selectedDate = queryDate;
+  else if (dates.includes(today)) selectedDate = today;
+  else selectedDate = dates.at(-1) ?? "";
   if (queryType === "BR" || queryType === "LU" || queryType === "DN") {
     selectedType = queryType;
   }
@@ -200,7 +232,7 @@ function renderDatePicker(): void {
   if (!manifest) return;
   datePicker.replaceChildren();
   const today = localIsoDate();
-  const dates = [...manifest.available_dates].sort();
+  const dates = [...manifest.available_dates].sort((left, right) => left.localeCompare(right));
 
   for (const date of dates) {
     const value = dateFromIso(date);
@@ -323,19 +355,16 @@ function renderRestaurant(restaurant: Restaurant): HTMLElement {
   return article;
 }
 
-function renderBuilding(building: Building): HTMLElement {
+function renderVenueCard(buildingNumber: string, venue: Venue): HTMLElement {
   const section = createElement("section", "building-card");
   const heading = createElement("header", "building-heading");
-  const number = createElement("span", "building-number", building.building_number);
-  const title = createElement(
-    "h2",
-    "building-name",
-    building.building_name ?? `${building.building_number} 식당`,
-  );
-  heading.append(number, title);
+  const title = createElement("h2", "building-title");
+  title.append(createElement("span", "building-number", buildingNumber));
+  if (venue.name) title.append(createElement("span", "building-name", venue.name));
+  heading.append(title);
 
   const restaurants = createElement("div", "restaurant-list");
-  for (const restaurant of building.restaurants) restaurants.append(renderRestaurant(restaurant));
+  for (const restaurant of venue.restaurants) restaurants.append(renderRestaurant(restaurant));
   section.append(heading, restaurants);
   return section;
 }
@@ -351,16 +380,19 @@ function renderMenu(): void {
     return;
   }
 
-  const buildings = section.buildings
-    .map((building) => ({
-      ...building,
-      restaurants: building.restaurants.filter(
-        (restaurant) => includeFixed || !restaurant.fixed_menu,
-      ),
-    }))
-    .filter((building) => building.restaurants.length > 0);
+  const venueCards = section.buildings
+    .flatMap((building) =>
+      building.venues.map((venue) => ({
+        building_number: building.building_number,
+        name: venue.name,
+        restaurants: venue.restaurants.filter(
+          (restaurant) => includeFixed || !restaurant.fixed_menu,
+        ),
+      })),
+    )
+    .filter((venue) => venue.restaurants.length > 0);
 
-  if (buildings.length === 0) {
+  if (venueCards.length === 0) {
     renderEmpty(
       includeFixed ? "등록된 메뉴가 없습니다" : "오늘의 식단 메뉴가 없습니다",
       includeFixed
@@ -379,12 +411,12 @@ function renderMenu(): void {
     createElement(
       "p",
       "result-count",
-      `${buildings.length}개 건물 · ${buildings.reduce((sum, building) => sum + building.restaurants.length, 0)}개 식당`,
+      `${new Set(venueCards.map((venue) => venue.building_number)).size}개 건물 · ${venueCards.reduce((sum, venue) => sum + venue.restaurants.length, 0)}개 식당`,
     ),
   );
   fragment.append(heading);
   const grid = createElement("div", "building-grid");
-  for (const building of buildings) grid.append(renderBuilding(building));
+  for (const venue of venueCards) grid.append(renderVenueCard(venue.building_number, venue));
   fragment.append(grid);
   content.replaceChildren(fragment);
 }
@@ -404,11 +436,14 @@ async function loadSelectedMenu(): Promise<void> {
 
   renderLoading();
   try {
-    const menu = await fetchJson<DateMenu>(dataUrl(dataLocation, `menus/${selectedDate}.json`));
+    const response = await fetchJson<DateMenu | LegacyDateMenu>(
+      dataUrl(dataLocation, `menus/${selectedDate}.json`),
+    );
     if (sequence !== requestSequence) return;
-    if (menu.date !== selectedDate || !Array.isArray(menu.types)) {
+    if (response.date !== selectedDate || !Array.isArray(response.types)) {
       throw new Error("메뉴 데이터 형식이 올바르지 않습니다.");
     }
+    const menu = normalizeMenu(response);
     menuCache.set(selectedDate, menu);
     currentMenu = menu;
     renderMenu();
@@ -426,7 +461,10 @@ async function initialize(): Promise<void> {
   try {
     const location = await resolveDataLocation();
     const nextManifest = await fetchJson<Manifest>(dataUrl(location, "manifest.json"));
-    if (nextManifest.schema_version !== 1 || !Array.isArray(nextManifest.available_dates)) {
+    if (
+      ![1, 2].includes(nextManifest.schema_version) ||
+      !Array.isArray(nextManifest.available_dates)
+    ) {
       throw new Error("지원하지 않는 데이터 형식입니다.");
     }
     dataLocation = location;

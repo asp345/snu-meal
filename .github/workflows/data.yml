@@ -24,9 +24,8 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
-      - run: npm run build:crawler
       - name: Crawl and export
-        run: node dist/crawl.mjs --output "$RUNNER_TEMP/snu-meal-data"
+        run: npm run export -- --output "$RUNNER_TEMP/snu-meal-data"
       - name: Publish data branch
         env:
           GH_TOKEN: ${{ github.token }}

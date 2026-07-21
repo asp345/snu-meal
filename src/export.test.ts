@@ -38,9 +38,74 @@ test("export data is grouped in meal, building, and registry order", () => {
     ["BR", "LU"],
   );
   assert.deepEqual(
-    menu?.types[1].buildings[0].restaurants.map(({ name }) => name),
-    ["두레미담 식당", "3식당 일반"],
+    menu?.types[1].buildings[0].venues.map((venue) => ({
+      name: venue.name,
+      restaurants: venue.restaurants.map((restaurant) => restaurant.name),
+    })),
+    [
+      { name: "두레미담", restaurants: ["식당"] },
+      { name: "3식당", restaurants: ["일반"] },
+    ],
   );
+});
+
+test("export separates venues and keeps their counters together", () => {
+  const restaurantNames = [
+    "두레미담 식당",
+    "두레미담 셀프코너",
+    "3식당 일반",
+    "3식당 든든한끼샐러드코너",
+    "4층 푸드코트 서가앤쿡",
+    "4층 푸드코트 토끼정",
+    "4층 푸드코트 숨쉬는순두부",
+    "4층 푸드코트 이공오 돈까스와 우동",
+    "301동식당 일반",
+    "301동식당 천원의아침밥",
+    "301동식당 TAKE-OUT",
+    "301동 1층 교직원전용식당",
+    "220동식당 경성 돈카츠",
+    "220동식당 바비든든",
+    "220동식당 포포420",
+    "220동식당 값찌개",
+    "220동식당 키친101",
+  ];
+  const data = buildExportData({
+    sourceCounts: { snuco: restaurantNames.length, snudorm: 0, vet: 0 },
+    payloads: restaurantNames.map((restaurant) => ({
+      restaurant,
+      date: "2026-07-18",
+      type: "LU",
+      meals: [{ price: null, no_meat: false, menus: ["메뉴"] }],
+    })),
+  });
+
+  const buildings = data.menus.get("2026-07-18")?.types[0].buildings;
+  const venues = (buildingNumber: string) =>
+    buildings
+      ?.find((building) => building.building_number === buildingNumber)
+      ?.venues.map((venue) => ({
+        name: venue.name,
+        restaurants: venue.restaurants.map((restaurant) => restaurant.name),
+      }));
+
+  assert.deepEqual(venues("75-1동"), [
+    { name: "두레미담", restaurants: ["식당", "셀프코너"] },
+    { name: "3식당", restaurants: ["일반", "든든한끼샐러드코너"] },
+    {
+      name: "4층 푸드코트",
+      restaurants: ["서가앤쿡", "토끼정", "숨쉬는순두부", "이공오 돈까스와 우동"],
+    },
+  ]);
+  assert.deepEqual(venues("301동"), [
+    { name: "301동식당", restaurants: ["일반", "천원의아침밥", "TAKE-OUT"] },
+    { name: "교직원전용식당", restaurants: ["1층"] },
+  ]);
+  assert.deepEqual(venues("220동"), [
+    {
+      name: "구시아 푸드코트",
+      restaurants: ["경성 돈카츠", "바비든든", "포포420", "값찌개", "키친101"],
+    },
+  ]);
 });
 
 test("export rejects crawler restaurants outside the registry", () => {

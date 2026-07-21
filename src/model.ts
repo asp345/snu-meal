@@ -23,8 +23,10 @@ export interface CrawlResult {
 export interface Restaurant {
   code: string;
   name: string;
+  display_name: string;
   building_number: string;
   building_name: string | null;
+  venue_name: string | null;
   fixed_menu: boolean;
   source: "snuco" | "snudorm" | "vet";
 }

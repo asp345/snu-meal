@@ -70,6 +70,20 @@ async function fetchJson(url) {
   if (!response.ok) throw new Error(`\uC694\uCCAD \uC2E4\uD328 (${response.status})`);
   return await response.json();
 }
+function normalizeMenu(menu) {
+  return {
+    date: menu.date,
+    types: menu.types.map((section) => ({
+      type: section.type,
+      buildings: section.buildings.map(
+        (building) => "venues" in building ? building : {
+          building_number: building.building_number,
+          venues: [{ name: null, restaurants: building.restaurants }]
+        }
+      )
+    }))
+  };
+}
 async function resolveDataLocation() {
   const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";
   if (isLocal) return { base: "./data", cacheBust: "" };
@@ -96,9 +110,11 @@ function parseQueryState(availableDates) {
   const queryDate = params.get("date");
   const queryType = params.get("type");
   const queryFixed = params.get("fixed");
-  const dates = [...availableDates].sort();
+  const dates = [...availableDates].sort((left, right) => left.localeCompare(right));
   const today = localIsoDate();
-  selectedDate = queryDate && dates.includes(queryDate) ? queryDate : dates.includes(today) ? today : dates.at(-1) ?? "";
+  if (queryDate && dates.includes(queryDate)) selectedDate = queryDate;
+  else if (dates.includes(today)) selectedDate = today;
+  else selectedDate = dates.at(-1) ?? "";
   if (queryType === "BR" || queryType === "LU" || queryType === "DN") {
     selectedType = queryType;
   }
@@ -127,7 +143,7 @@ function renderDatePicker() {
   if (!manifest) return;
   datePicker.replaceChildren();
   const today = localIsoDate();
-  const dates = [...manifest.available_dates].sort();
+  const dates = [...manifest.available_dates].sort((left, right) => left.localeCompare(right));
   for (const date of dates) {
     const value = dateFromIso(date);
     const button = createElement("button", "date-option");
@@ -239,18 +255,15 @@ function renderRestaurant(restaurant) {
   article.append(heading, meals);
   return article;
 }
-function renderBuilding(building) {
+function renderVenueCard(buildingNumber, venue) {
   const section = createElement("section", "building-card");
   const heading = createElement("header", "building-heading");
-  const number = createElement("span", "building-number", building.building_number);
-  const title = createElement(
-    "h2",
-    "building-name",
-    building.building_name ?? `${building.building_number} \uC2DD\uB2F9`
-  );
-  heading.append(number, title);
+  const title = createElement("h2", "building-title");
+  title.append(createElement("span", "building-number", buildingNumber));
+  if (venue.name) title.append(createElement("span", "building-name", venue.name));
+  heading.append(title);
   const restaurants = createElement("div", "restaurant-list");
-  for (const restaurant of building.restaurants) restaurants.append(renderRestaurant(restaurant));
+  for (const restaurant of venue.restaurants) restaurants.append(renderRestaurant(restaurant));
   section.append(heading, restaurants);
   return section;
 }
@@ -264,13 +277,16 @@ function renderMenu() {
     );
     return;
   }
-  const buildings = section.buildings.map((building) => ({
-    ...building,
-    restaurants: building.restaurants.filter(
-      (restaurant) => includeFixed || !restaurant.fixed_menu
-    )
-  })).filter((building) => building.restaurants.length > 0);
-  if (buildings.length === 0) {
+  const venueCards = section.buildings.flatMap(
+    (building) => building.venues.map((venue) => ({
+      building_number: building.building_number,
+      name: venue.name,
+      restaurants: venue.restaurants.filter(
+        (restaurant) => includeFixed || !restaurant.fixed_menu
+      )
+    }))
+  ).filter((venue) => venue.restaurants.length > 0);
+  if (venueCards.length === 0) {
     renderEmpty(
       includeFixed ? "\uB4F1\uB85D\uB41C \uBA54\uB274\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4" : "\uC624\uB298\uC758 \uC2DD\uB2E8 \uBA54\uB274\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4",
       includeFixed ? "\uB2E4\uB978 \uC2DD\uC0AC \uC2DC\uAC04\uC774\uB098 \uB0A0\uC9DC\uB97C \uC120\uD0DD\uD574 \uBCF4\uC138\uC694." : "\uC0C1\uC2DC \uBA54\uB274\uB97C \uD3EC\uD568\uD558\uAC70\uB098 \uB2E4\uB978 \uC2DD\uC0AC \uC2DC\uAC04\uC744 \uC120\uD0DD\uD574 \uBCF4\uC138\uC694."
@@ -286,12 +302,12 @@ function renderMenu() {
     createElement(
       "p",
       "result-count",
-      `${buildings.length}\uAC1C \uAC74\uBB3C \xB7 ${buildings.reduce((sum, building) => sum + building.restaurants.length, 0)}\uAC1C \uC2DD\uB2F9`
+      `${new Set(venueCards.map((venue) => venue.building_number)).size}\uAC1C \uAC74\uBB3C \xB7 ${venueCards.reduce((sum, venue) => sum + venue.restaurants.length, 0)}\uAC1C \uC2DD\uB2F9`
     )
   );
   fragment.append(heading);
   const grid = createElement("div", "building-grid");
-  for (const building of buildings) grid.append(renderBuilding(building));
+  for (const venue of venueCards) grid.append(renderVenueCard(venue.building_number, venue));
   fragment.append(grid);
   content.replaceChildren(fragment);
 }
@@ -309,11 +325,14 @@ async function loadSelectedMenu() {
   }
   renderLoading();
   try {
-    const menu = await fetchJson(dataUrl(dataLocation, `menus/${selectedDate}.json`));
+    const response = await fetchJson(
+      dataUrl(dataLocation, `menus/${selectedDate}.json`)
+    );
     if (sequence !== requestSequence) return;
-    if (menu.date !== selectedDate || !Array.isArray(menu.types)) {
+    if (response.date !== selectedDate || !Array.isArray(response.types)) {
       throw new Error("\uBA54\uB274 \uB370\uC774\uD130 \uD615\uC2DD\uC774 \uC62C\uBC14\uB974\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.");
     }
+    const menu = normalizeMenu(response);
     menuCache.set(selectedDate, menu);
     currentMenu = menu;
     renderMenu();
@@ -330,7 +349,7 @@ async function initialize() {
   try {
     const location2 = await resolveDataLocation();
     const nextManifest = await fetchJson(dataUrl(location2, "manifest.json"));
-    if (nextManifest.schema_version !== 1 || !Array.isArray(nextManifest.available_dates)) {
+    if (![1, 2].includes(nextManifest.schema_version) || !Array.isArray(nextManifest.available_dates)) {
       throw new Error("\uC9C0\uC6D0\uD558\uC9C0 \uC54A\uB294 \uB370\uC774\uD130 \uD615\uC2DD\uC785\uB2C8\uB2E4.");
     }
     dataLocation = location2;

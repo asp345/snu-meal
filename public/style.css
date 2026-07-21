@@ -460,11 +460,19 @@ main {
 }
 
 .building-heading {
-  gap: 12px;
   min-height: 67px;
   padding: 15px 18px;
   border-bottom: 1px solid var(--line);
   background: #eef1e9;
+}
+
+.building-title {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
 }
 
 .building-number {
@@ -787,6 +795,10 @@ noscript {
   .building-heading {
     align-items: flex-start;
     padding: 13px 14px;
+  }
+
+  .building-title {
+    align-items: flex-start;
   }
 
   .building-name {
