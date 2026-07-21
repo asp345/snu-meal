@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 45 920;
+  font-display: swap;
+  src: url("./fonts/PretendardVariable.woff2") format("woff2");
+}
+
 :root {
   color-scheme: light;
   --ink: #17231f;
@@ -11,7 +19,11 @@
   --coral: #ed6a4b;
   --shadow: 0 16px 38px rgba(24, 50, 40, 0.08);
   font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+    "Pretendard",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   font-synthesis: none;
 }
 
@@ -565,7 +577,7 @@ main {
 
 .menu-name {
   color: var(--ink);
-  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-family: inherit;
   font-size: 0.86rem;
   font-weight: 400;
   line-height: 1.55;
@@ -575,8 +587,12 @@ main {
 
 .menu-name:not(:last-child)::after {
   margin-left: 7px;
-  color: #bdc4bd;
+  color: #707c73;
   content: "·";
+  font-family: inherit;
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .meal-details {
