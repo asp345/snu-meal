@@ -42,7 +42,7 @@ body {
   min-height: 100vh;
   margin: 0;
   color: var(--ink);
-  background: linear-gradient(180deg, var(--blue-900) 0 10rem, var(--blue-50) 10rem);
+  background: var(--blue-50);
   font-size: 16px;
   line-height: 1.5;
 }
@@ -64,11 +64,12 @@ input:focus-visible {
 
 .page-shell {
   min-height: 100vh;
-  padding-bottom: 176px;
+  padding-bottom: 164px;
 }
 
 .site-header {
   color: #fff;
+  background: var(--blue-900);
 }
 
 .header-inner {
@@ -399,7 +400,11 @@ main {
   bottom: 0;
   left: 0;
   z-index: 20;
-  padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 -6px 32px rgba(7, 26, 47, 0.1);
+  backdrop-filter: blur(14px);
+  padding: 12px 24px calc(12px + env(safe-area-inset-bottom));
 }
 
 .control-inner {
@@ -407,12 +412,6 @@ main {
   width: min(760px, 100%);
   gap: 8px;
   margin: 0 auto;
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 -6px 32px rgba(7, 26, 47, 0.16);
-  backdrop-filter: blur(14px);
 }
 
 .date-picker {
@@ -591,12 +590,8 @@ noscript {
 }
 
 @media (max-width: 780px) {
-  body {
-    background: linear-gradient(180deg, var(--blue-900) 0 8.6rem, var(--blue-50) 8.6rem);
-  }
-
   .page-shell {
-    padding-bottom: 172px;
+    padding-bottom: 160px;
   }
 
   .header-inner {
@@ -668,13 +663,11 @@ noscript {
   }
 
   .control-bar {
-    padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
   }
 
   .control-inner {
     gap: 7px;
-    padding: 10px;
-    border-radius: 16px;
   }
 
   .date-picker {
