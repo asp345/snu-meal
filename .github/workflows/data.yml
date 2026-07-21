@@ -22,7 +22,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: 26
       - run: npm ci
       - name: Crawl and export
         run: npm run export -- --output "$RUNNER_TEMP/snu-meal-data"

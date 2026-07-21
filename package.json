@@ -4,11 +4,11 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "scripts": {
     "build": "npm run build:crawler && npm run build:web",
-    "build:crawler": "esbuild src/export.ts --bundle --platform=node --target=node24 --format=esm --banner:js=\"import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);\" --outfile=dist/crawl.mjs",
+    "build:crawler": "esbuild src/export.ts --bundle --platform=node --target=node26 --format=esm --banner:js=\"import { createRequire } from 'node:module'; const require = createRequire(import.meta.url);\" --outfile=dist/crawl.mjs",
     "build:web": "esbuild src/web/app.ts --bundle --platform=browser --target=es2022 --format=esm --outfile=public/app.js",
     "export": "npm run build:crawler && node dist/crawl.mjs",
     "format": "prettier --write .github/workflows/*.yml package.json src public/index.html public/style.css",
@@ -22,7 +22,7 @@
     "htmlparser2": "^12.0.0"
   },
   "devDependencies": {
-    "@types/node": "^24.13.3",
+    "@types/node": "^26.1.1",
     "esbuild": "^0.28.1",
     "prettier": "^3.9.6",
     "tsx": "^4.20.0",
