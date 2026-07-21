@@ -32,8 +32,8 @@ function decodeBody(body: Buffer, headers: IncomingHttpHeaders): string {
   }
 }
 
-function parseUrl(value: string): URL | undefined {
-  return URL.parse(value) ?? undefined;
+function parseUrl(value: string, base?: URL): URL | undefined {
+  return URL.parse(value, base) ?? undefined;
 }
 
 export function fetchText(
@@ -63,8 +63,12 @@ export function fetchText(
             reject(new Error(`Too many redirects fetching ${url}`));
             return;
           }
-          const redirectedUrl = new URL(location, parsedUrl).toString();
-          fetchText(redirectedUrl, options, redirects + 1).then(resolve, reject);
+          const redirectedUrl = parseUrl(location, parsedUrl);
+          if (!redirectedUrl) {
+            reject(new Error(`Invalid redirect URL from ${url}`));
+            return;
+          }
+          fetchText(redirectedUrl.toString(), options, redirects + 1).then(resolve, reject);
           return;
         }
 
