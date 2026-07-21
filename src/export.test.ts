@@ -98,7 +98,7 @@ test("export separates venues and keeps their counters together", () => {
     },
   ]);
   assert.deepEqual(venues("301동"), [
-    { name: "301동식당 (B1층)", restaurants: ["일반", "천원의아침밥", "TAKE-OUT"] },
+    { name: "삼성웰스토리", restaurants: ["일반", "천원의아침밥", "TAKE-OUT"] },
     { name: "교직원전용식당", restaurants: ["1층"] },
   ]);
   assert.deepEqual(venues("220동"), [
