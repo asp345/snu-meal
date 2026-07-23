@@ -410,12 +410,17 @@ export function buildSnucoPayloads(html: string, date: string): Payload[] {
   const tbody = table.children("tbody").first();
   if (!table.length || !tbody.length) throw new Error("SNUCO menu table not found");
 
-  const payloads: Payload[] = [];
+  const rowsByRestaurant = new Map<string, Element[]>();
   tbody.children("tr").each((_, row) => {
     const cells = $(row).children("td").toArray();
     if (!cells.length) return;
     const name = cleanRestaurantName(strippedText($(cells[0]), " "));
-    if (EXCLUDED_RESTAURANTS.has(name)) return;
+    rowsByRestaurant.set(name, cells);
+  });
+
+  const payloads: Payload[] = [];
+  for (const [name, cells] of rowsByRestaurant) {
+    if (EXCLUDED_RESTAURANTS.has(name)) continue;
     const cafeteria = CAFETERIAS.get(name);
     if (!cafeteria) throw new Error(`Unknown SNUCO restaurant: ${name}`);
 
@@ -433,7 +438,7 @@ export function buildSnucoPayloads(html: string, date: string): Payload[] {
         meals: generalized.meals,
       });
     }
-  });
+  }
   return payloads;
 }
 
