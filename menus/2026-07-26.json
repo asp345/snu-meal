@@ -1,0 +1,166 @@
+{
+  "date": "2026-07-26",
+  "types": [
+    {
+      "type": "BR",
+      "buildings": [
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 5000,
+                      "no_meat": false,
+                      "menus": [
+                        "감자스프",
+                        "수제비국",
+                        "물만두강정",
+                        "오믈렛",
+                        "토스트",
+                        "씨리얼",
+                        "흰우유",
+                        "두유",
+                        "그린샐러드"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "LU",
+      "buildings": [
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "통마늘부추제육볶음",
+                        "양배추쌈",
+                        "쌈장"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "소떡소떡"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "919동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "dorm_coop",
+                  "name": "기숙사식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "등심탕수육"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "DN",
+      "buildings": [
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "잔치국수",
+                        "마늘바삭치킨강정"
+                      ]
+                    },
+                    {
+                      "price": 3000,
+                      "no_meat": false,
+                      "menus": [
+                        "고기깻잎",
+                        "고추튀김"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "919동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "dorm_coop",
+                  "name": "기숙사식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": true,
+                      "menus": [
+                        "매콤낙지비빔밥"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

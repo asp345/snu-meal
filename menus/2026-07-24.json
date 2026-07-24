@@ -1,0 +1,63 @@
+{
+  "date": "2026-07-24",
+  "types": [
+    {
+      "type": "LU",
+      "buildings": [
+        {
+          "building_number": "85동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "vet",
+                  "name": "수의대식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": null,
+                      "no_meat": false,
+                      "menus": [
+                        "소불고기덮밥"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "DN",
+      "buildings": [
+        {
+          "building_number": "85동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "vet",
+                  "name": "수의대식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": null,
+                      "no_meat": false,
+                      "menus": [
+                        "제육볶음"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

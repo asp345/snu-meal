@@ -1,0 +1,1215 @@
+{
+  "date": "2026-07-27",
+  "types": [
+    {
+      "type": "BR",
+      "buildings": [
+        {
+          "building_number": "63동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "student_union",
+                  "name": "학생회관식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 3000,
+                      "no_meat": false,
+                      "menus": [
+                        "무쇠고기국백반"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "301동",
+          "venues": [
+            {
+              "name": "삼성웰스토리",
+              "restaurants": [
+                {
+                  "code": "building_301_breakfast",
+                  "name": "천원의아침밥",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 1000,
+                      "no_meat": false,
+                      "menus": [
+                        "장조림컵밥",
+                        "두유"
+                      ]
+                    },
+                    {
+                      "price": 1000,
+                      "no_meat": false,
+                      "menus": [
+                        "삼각김밥",
+                        "요거트",
+                        "바나나",
+                        "두유"
+                      ]
+                    },
+                    {
+                      "price": 1000,
+                      "no_meat": false,
+                      "menus": [
+                        "즉석떡국"
+                      ]
+                    },
+                    {
+                      "price": 1000,
+                      "no_meat": false,
+                      "menus": [
+                        "즉석라면"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 5000,
+                      "no_meat": false,
+                      "menus": [
+                        "당근스프",
+                        "김치두부국",
+                        "단호박조림",
+                        "삶은계란",
+                        "토스트",
+                        "씨리얼",
+                        "흰우유",
+                        "두유",
+                        "그린샐러드"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "LU",
+      "buildings": [
+        {
+          "building_number": "63동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "student_union",
+                  "name": "학생회관식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "삼겹살콩나물찜"
+                      ]
+                    },
+                    {
+                      "price": 3000,
+                      "no_meat": true,
+                      "menus": [
+                        "참치김치찌개"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "109동",
+          "venues": [
+            {
+              "name": "자하연식당",
+              "restaurants": [
+                {
+                  "code": "jahayeon_3f",
+                  "name": "3층",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 13000,
+                      "no_meat": false,
+                      "menus": [
+                        "깐쇼새우"
+                      ]
+                    },
+                    {
+                      "price": 14000,
+                      "no_meat": false,
+                      "menus": [
+                        "스키야키"
+                      ]
+                    },
+                    {
+                      "price": null,
+                      "no_meat": false,
+                      "menus": [
+                        "순대야채볶음",
+                        "알감자조림",
+                        "그린샐러드",
+                        "유부국",
+                        "후식"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "code": "jahayeon_2f",
+                  "name": "2층",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "쇠고기장조림버터비빔밥",
+                        "양념떡꼬치"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "74동",
+          "venues": [
+            {
+              "name": "예술계식당",
+              "restaurants": [
+                {
+                  "code": "art_a",
+                  "name": "A코너",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "뚝배기) 부대찌개",
+                        "라면사리",
+                        "돈육강정",
+                        "어묵볶음"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "code": "art_c",
+                  "name": "C코너",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 3000,
+                      "no_meat": false,
+                      "menus": [
+                        "셀프라면",
+                        "밥",
+                        "김치"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "75-1동",
+          "venues": [
+            {
+              "name": "두레미담 (5층)",
+              "restaurants": [
+                {
+                  "code": "duremidam_order",
+                  "name": "식당",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 14000,
+                      "no_meat": false,
+                      "menus": [
+                        "고등어 소금구이"
+                      ]
+                    },
+                    {
+                      "price": 15000,
+                      "no_meat": false,
+                      "menus": [
+                        "철판주꾸미 볶음"
+                      ]
+                    },
+                    {
+                      "price": 15000,
+                      "no_meat": false,
+                      "menus": [
+                        "철판제육볶음"
+                      ]
+                    },
+                    {
+                      "price": 16000,
+                      "no_meat": false,
+                      "menus": [
+                        "떡갈비 구이"
+                      ]
+                    },
+                    {
+                      "price": 19000,
+                      "no_meat": false,
+                      "menus": [
+                        "소갈비탕"
+                      ]
+                    },
+                    {
+                      "price": 16000,
+                      "no_meat": false,
+                      "menus": [
+                        "7선 산채비빔밥"
+                      ]
+                    },
+                    {
+                      "price": 15000,
+                      "no_meat": false,
+                      "menus": [
+                        "소불고기뚝배기"
+                      ]
+                    },
+                    {
+                      "price": 12000,
+                      "no_meat": false,
+                      "menus": [
+                        "차돌순두부"
+                      ]
+                    },
+                    {
+                      "price": 12000,
+                      "no_meat": false,
+                      "menus": [
+                        "냉면"
+                      ]
+                    },
+                    {
+                      "price": 12000,
+                      "no_meat": false,
+                      "menus": [
+                        "초계국수"
+                      ]
+                    },
+                    {
+                      "price": 18000,
+                      "no_meat": false,
+                      "menus": [
+                        "미담삼계탕"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "솥밥(추가)"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "code": "duremidam_self",
+                  "name": "셀프코너",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 7000,
+                      "no_meat": false,
+                      "menus": [
+                        "잡곡밥",
+                        "우거지장터국밥",
+                        "직화제육볶음",
+                        "나쵸치즈디핑치킨스틱",
+                        "팟타이볶음우동",
+                        "콩자반",
+                        "깍두기",
+                        "그린샐러드",
+                        "오늘의차"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "3식당 (3층)",
+              "restaurants": [
+                {
+                  "code": "cafeteria_3",
+                  "name": "일반",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "차돌된장찌개"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "짜계볶",
+                        "고기튀김강정"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "113동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "dongwon",
+                  "name": "동원관식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "차돌양지쌀국수"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "302동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "building_302",
+                  "name": "302동식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "소고기샤브전골",
+                        "칠리깐풍육",
+                        "토마토스크램블에그",
+                        "명엽채아몬드볶음",
+                        "콩나물무침",
+                        "그린샐러드",
+                        "오늘의차"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "301동",
+          "venues": [
+            {
+              "name": "삼성웰스토리",
+              "restaurants": [
+                {
+                  "code": "building_301",
+                  "name": "일반",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "제육생야채비빔밥",
+                        "고구마맛탕"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "(뚝)북어채해장국",
+                        "계란장조림"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "code": "building_301_takeout",
+                  "name": "TAKE-OUT",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "닭가슴살큐브샐러드"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "헬스팩"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "교직원전용식당",
+              "restaurants": [
+                {
+                  "code": "building_301_staff",
+                  "name": "1층",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 9000,
+                      "no_meat": false,
+                      "menus": [
+                        "치즈부대찌개",
+                        "라면사리"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "30-2동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "engineering_snack",
+                  "name": "공대간이식당",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "짜장면"
+                      ]
+                    },
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "짬뽕"
+                      ]
+                    },
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "고기소보로 볶음밥"
+                      ]
+                    },
+                    {
+                      "price": 5000,
+                      "no_meat": false,
+                      "menus": [
+                        "곱빼기메뉴"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "콤비메뉴"
+                      ]
+                    },
+                    {
+                      "price": 6300,
+                      "no_meat": false,
+                      "menus": [
+                        "순두부짬뽕"
+                      ]
+                    },
+                    {
+                      "price": 6300,
+                      "no_meat": false,
+                      "menus": [
+                        "콩국수"
+                      ]
+                    },
+                    {
+                      "price": 6800,
+                      "no_meat": false,
+                      "menus": [
+                        "부대짬뽕"
+                      ]
+                    },
+                    {
+                      "price": 7000,
+                      "no_meat": false,
+                      "menus": [
+                        "돈가스비빔면"
+                      ]
+                    },
+                    {
+                      "price": 7000,
+                      "no_meat": false,
+                      "menus": [
+                        "탄탄비빔면"
+                      ]
+                    },
+                    {
+                      "price": 7000,
+                      "no_meat": false,
+                      "menus": [
+                        "중화제육덮밥"
+                      ]
+                    },
+                    {
+                      "price": 7700,
+                      "no_meat": false,
+                      "menus": [
+                        "마라탕"
+                      ]
+                    },
+                    {
+                      "price": 8300,
+                      "no_meat": false,
+                      "menus": [
+                        "호구세트"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "치킨탕수육 (大)"
+                      ]
+                    },
+                    {
+                      "price": 9900,
+                      "no_meat": false,
+                      "menus": [
+                        "우삼겹짬뽕"
+                      ]
+                    },
+                    {
+                      "price": 700,
+                      "no_meat": false,
+                      "menus": [
+                        "공기밥"
+                      ]
+                    },
+                    {
+                      "price": 1500,
+                      "no_meat": false,
+                      "menus": [
+                        "탄산음료"
+                      ]
+                    },
+                    {
+                      "price": 1000,
+                      "no_meat": false,
+                      "menus": [
+                        "계란후라이"
+                      ]
+                    },
+                    {
+                      "price": 2500,
+                      "no_meat": false,
+                      "menus": [
+                        "찐만두"
+                      ]
+                    },
+                    {
+                      "price": 2800,
+                      "no_meat": false,
+                      "menus": [
+                        "찹쌀 팥 도나쓰"
+                      ]
+                    },
+                    {
+                      "price": 4000,
+                      "no_meat": false,
+                      "menus": [
+                        "미니탕수육"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "돼지수육국밥",
+                        "소면사리",
+                        "매콤야채전"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "들기름산채고추장볶음밥",
+                        "달콤순살닭강정"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "고구마치즈고로케"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "919동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "dorm_coop",
+                  "name": "기숙사식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "고추잡채",
+                        "꽃빵"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "DN",
+      "buildings": [
+        {
+          "building_number": "63동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "student_union",
+                  "name": "학생회관식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 3000,
+                      "no_meat": true,
+                      "menus": [
+                        "두부짜장"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "109동",
+          "venues": [
+            {
+              "name": "자하연식당",
+              "restaurants": [
+                {
+                  "code": "jahayeon_2f",
+                  "name": "2층",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "토종닭볶음탕"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "74동",
+          "venues": [
+            {
+              "name": "예술계식당",
+              "restaurants": [
+                {
+                  "code": "art_a",
+                  "name": "A코너",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "뚝배기)짬뽕파스타",
+                        "왕새우튀김",
+                        "칠리소스",
+                        "마늘바게트"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "75-1동",
+          "venues": [
+            {
+              "name": "두레미담 (5층)",
+              "restaurants": [
+                {
+                  "code": "duremidam_order",
+                  "name": "식당",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 14000,
+                      "no_meat": false,
+                      "menus": [
+                        "고등어 소금구이"
+                      ]
+                    },
+                    {
+                      "price": 15000,
+                      "no_meat": false,
+                      "menus": [
+                        "철판주꾸미 볶음"
+                      ]
+                    },
+                    {
+                      "price": 15000,
+                      "no_meat": false,
+                      "menus": [
+                        "철판제육볶음"
+                      ]
+                    },
+                    {
+                      "price": 16000,
+                      "no_meat": false,
+                      "menus": [
+                        "떡갈비 구이"
+                      ]
+                    },
+                    {
+                      "price": 19000,
+                      "no_meat": false,
+                      "menus": [
+                        "소갈비탕"
+                      ]
+                    },
+                    {
+                      "price": 16000,
+                      "no_meat": false,
+                      "menus": [
+                        "7선 산채비빔밥"
+                      ]
+                    },
+                    {
+                      "price": 15000,
+                      "no_meat": false,
+                      "menus": [
+                        "소불고기뚝배기"
+                      ]
+                    },
+                    {
+                      "price": 12000,
+                      "no_meat": false,
+                      "menus": [
+                        "차돌순두부"
+                      ]
+                    },
+                    {
+                      "price": 12000,
+                      "no_meat": false,
+                      "menus": [
+                        "냉면"
+                      ]
+                    },
+                    {
+                      "price": 12000,
+                      "no_meat": false,
+                      "menus": [
+                        "초계국수"
+                      ]
+                    },
+                    {
+                      "price": 18000,
+                      "no_meat": false,
+                      "menus": [
+                        "미담삼계탕"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "솥밥(추가)"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "code": "duremidam_self",
+                  "name": "셀프코너",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 7000,
+                      "no_meat": false,
+                      "menus": [
+                        "훈제오리볶음밥",
+                        "콩나물국",
+                        "순살치킨",
+                        "살사소스",
+                        "미트볼데리야끼조림",
+                        "짜사이무침",
+                        "이츠웰코코아와플과자",
+                        "포기김치",
+                        "그린샐러드",
+                        "오늘의차"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "302동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "building_302",
+                  "name": "302동식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "핫커리",
+                        "치킨까스",
+                        "볶음우동",
+                        "콘샐러드",
+                        "오복채무침",
+                        "얼갈이된장국",
+                        "그린샐러드",
+                        "오늘의차"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "30-2동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "engineering_snack",
+                  "name": "공대간이식당",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "짜장면"
+                      ]
+                    },
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "짬뽕"
+                      ]
+                    },
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "고기소보로 볶음밥"
+                      ]
+                    },
+                    {
+                      "price": 5000,
+                      "no_meat": false,
+                      "menus": [
+                        "곱빼기메뉴"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "콤비메뉴"
+                      ]
+                    },
+                    {
+                      "price": 6300,
+                      "no_meat": false,
+                      "menus": [
+                        "순두부짬뽕"
+                      ]
+                    },
+                    {
+                      "price": 6300,
+                      "no_meat": false,
+                      "menus": [
+                        "콩국수"
+                      ]
+                    },
+                    {
+                      "price": 6800,
+                      "no_meat": false,
+                      "menus": [
+                        "부대짬뽕"
+                      ]
+                    },
+                    {
+                      "price": 7000,
+                      "no_meat": false,
+                      "menus": [
+                        "돈가스비빔면"
+                      ]
+                    },
+                    {
+                      "price": 7000,
+                      "no_meat": false,
+                      "menus": [
+                        "탄탄비빔면"
+                      ]
+                    },
+                    {
+                      "price": 7000,
+                      "no_meat": false,
+                      "menus": [
+                        "중화제육덮밥"
+                      ]
+                    },
+                    {
+                      "price": 7700,
+                      "no_meat": false,
+                      "menus": [
+                        "마라탕"
+                      ]
+                    },
+                    {
+                      "price": 8300,
+                      "no_meat": false,
+                      "menus": [
+                        "호구세트"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "치킨탕수육 (大)"
+                      ]
+                    },
+                    {
+                      "price": 9900,
+                      "no_meat": false,
+                      "menus": [
+                        "우삼겹짬뽕"
+                      ]
+                    },
+                    {
+                      "price": 700,
+                      "no_meat": false,
+                      "menus": [
+                        "공기밥"
+                      ]
+                    },
+                    {
+                      "price": 1500,
+                      "no_meat": false,
+                      "menus": [
+                        "탄산음료"
+                      ]
+                    },
+                    {
+                      "price": 1000,
+                      "no_meat": false,
+                      "menus": [
+                        "계란후라이"
+                      ]
+                    },
+                    {
+                      "price": 2500,
+                      "no_meat": false,
+                      "menus": [
+                        "찐만두"
+                      ]
+                    },
+                    {
+                      "price": 2800,
+                      "no_meat": false,
+                      "menus": [
+                        "찹쌀 팥 도나쓰"
+                      ]
+                    },
+                    {
+                      "price": 4000,
+                      "no_meat": false,
+                      "menus": [
+                        "미니탕수육"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "탄탄멘",
+                        "야채춘권"
+                      ]
+                    },
+                    {
+                      "price": 3000,
+                      "no_meat": false,
+                      "menus": [
+                        "꿔바로우"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "919동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "dorm_coop",
+                  "name": "기숙사식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "설렁탕",
+                        "가자미양념구이"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

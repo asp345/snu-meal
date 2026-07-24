@@ -1,0 +1,449 @@
+{
+  "date": "2026-07-25",
+  "types": [
+    {
+      "type": "BR",
+      "buildings": [
+        {
+          "building_number": "220동",
+          "venues": [
+            {
+              "name": "구시아 푸드코트",
+              "restaurants": [
+                {
+                  "code": "building_220_poppo",
+                  "name": "포포420",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "비빔 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "비빔 쌀국수",
+                        "직화구이"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 냉쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 냉짤국수",
+                        "직화구이"
+                      ]
+                    },
+                    {
+                      "price": 7500,
+                      "no_meat": false,
+                      "menus": [
+                        "얼큰 해물 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "우삼겹 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "마라우삼겹 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "직화구이 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 분짜"
+                      ]
+                    },
+                    {
+                      "price": 4000,
+                      "no_meat": false,
+                      "menus": [
+                        "직화구이"
+                      ]
+                    },
+                    {
+                      "price": 1000,
+                      "no_meat": false,
+                      "menus": [
+                        "야채춘권(3p)"
+                      ]
+                    },
+                    {
+                      "price": 1500,
+                      "no_meat": false,
+                      "menus": [
+                        "반꿔이"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 5000,
+                      "no_meat": false,
+                      "menus": [
+                        "그린스프",
+                        "시금치국",
+                        "알감자버터구이",
+                        "삶은계란",
+                        "토스트",
+                        "씨리얼",
+                        "흰우유",
+                        "두유",
+                        "그린샐러드"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "LU",
+      "buildings": [
+        {
+          "building_number": "220동",
+          "venues": [
+            {
+              "name": "구시아 푸드코트",
+              "restaurants": [
+                {
+                  "code": "building_220_poppo",
+                  "name": "포포420",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "비빔 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "비빔 쌀국수",
+                        "직화구이"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 냉쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 냉짤국수",
+                        "직화구이"
+                      ]
+                    },
+                    {
+                      "price": 7500,
+                      "no_meat": false,
+                      "menus": [
+                        "얼큰 해물 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "우삼겹 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "마라우삼겹 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "직화구이 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 분짜"
+                      ]
+                    },
+                    {
+                      "price": 4000,
+                      "no_meat": false,
+                      "menus": [
+                        "직화구이"
+                      ]
+                    },
+                    {
+                      "price": 1000,
+                      "no_meat": false,
+                      "menus": [
+                        "야채춘권(3p)"
+                      ]
+                    },
+                    {
+                      "price": 1500,
+                      "no_meat": false,
+                      "menus": [
+                        "반꿔이"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "숯불바베큐치밥",
+                        "치즈카츠"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "츄러스",
+                        "초코소스"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "DN",
+      "buildings": [
+        {
+          "building_number": "220동",
+          "venues": [
+            {
+              "name": "구시아 푸드코트",
+              "restaurants": [
+                {
+                  "code": "building_220_poppo",
+                  "name": "포포420",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "비빔 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "비빔 쌀국수",
+                        "직화구이"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 냉쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 냉짤국수",
+                        "직화구이"
+                      ]
+                    },
+                    {
+                      "price": 7500,
+                      "no_meat": false,
+                      "menus": [
+                        "얼큰 해물 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "우삼겹 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "마라우삼겹 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "직화구이 쌀국수"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "포포 분짜"
+                      ]
+                    },
+                    {
+                      "price": 4000,
+                      "no_meat": false,
+                      "menus": [
+                        "직화구이"
+                      ]
+                    },
+                    {
+                      "price": 1000,
+                      "no_meat": false,
+                      "menus": [
+                        "야채춘권(3p)"
+                      ]
+                    },
+                    {
+                      "price": 1500,
+                      "no_meat": false,
+                      "menus": [
+                        "반꿔이"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "양지육개장",
+                        "당면사리",
+                        "녹두전",
+                        "양파간장"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "순살햄후라이"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
