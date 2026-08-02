@@ -2,7 +2,7 @@ name: Update meal data
 
 on:
   schedule:
-    - cron: "17,47 * * * *"
+    - cron: "17 0 * * *"
   workflow_dispatch:
 
 permissions:
