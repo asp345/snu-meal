@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
+import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
 import type { CrawlResult } from "./model.js";
-import { buildExportData } from "./export.js";
+import { buildExportData, mergeExistingDates } from "./export.js";
 import { RESTAURANTS } from "./registry.js";
 
 test("export data is grouped in meal, building, and registry order", () => {
@@ -132,4 +135,92 @@ test("export rejects crawler restaurants outside the registry", () => {
       }),
     /Unknown restaurant/,
   );
+});
+
+test("merge keeps dates missing from the new crawl", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "snu-meal-test-"));
+  try {
+    const menusDir = join(dir, "menus");
+    await mkdir(menusDir, { recursive: true });
+    const oldDate = "2026-07-20";
+    await writeFile(
+      join(menusDir, `${oldDate}.json`),
+      JSON.stringify({
+        date: oldDate,
+        types: [
+          {
+            type: "LU",
+            buildings: [
+              {
+                building_number: "85동",
+                venues: [
+                  {
+                    name: null,
+                    restaurants: [
+                      {
+                        code: "vet",
+                        name: "수의대식당",
+                        fixed_menu: false,
+                        meals: [{ price: null, no_meat: false, menus: ["소불고기덮밥"] }],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      }),
+    );
+
+    const data = buildExportData({
+      sourceCounts: { snuco: 1, snudorm: 0, vet: 0 },
+      payloads: [
+        {
+          restaurant: "수의대식당",
+          date: "2026-07-21",
+          type: "LU",
+          meals: [{ price: null, no_meat: false, menus: ["제육볶음"] }],
+        },
+      ],
+    });
+    await mergeExistingDates(dir, data);
+
+    assert.deepEqual(data.manifest.available_dates, ["2026-07-20", "2026-07-21"]);
+    assert.equal(data.menus.get("2026-07-20")?.types[0].type, "LU");
+    assert.equal(data.menus.get("2026-07-21")?.types[0].type, "LU");
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("merge replaces dates present in the new crawl and skips bad files", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "snu-meal-test-"));
+  try {
+    const menusDir = join(dir, "menus");
+    await mkdir(menusDir, { recursive: true });
+    await writeFile(join(menusDir, "2026-07-20.json"), "{ not json");
+    await writeFile(
+      join(menusDir, "2026-07-21.json"),
+      JSON.stringify({ date: "2026-07-21", types: [{ type: "BR", buildings: [] }] }),
+    );
+
+    const data = buildExportData({
+      sourceCounts: { snuco: 1, snudorm: 0, vet: 0 },
+      payloads: [
+        {
+          restaurant: "수의대식당",
+          date: "2026-07-21",
+          type: "LU",
+          meals: [{ price: null, no_meat: false, menus: ["제육볶음"] }],
+        },
+      ],
+    });
+    await mergeExistingDates(dir, data);
+
+    assert.deepEqual(data.manifest.available_dates, ["2026-07-21"]);
+    assert.equal(data.menus.get("2026-07-21")?.types[0].type, "LU");
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });

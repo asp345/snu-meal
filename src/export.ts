@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { mkdir, rename, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
 import { basename, dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { crawlAll } from "./crawler/index.js";
@@ -204,6 +204,34 @@ function json(value: unknown): string {
   return `${JSON.stringify(value, null, 2)}\n`;
 }
 
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+export async function mergeExistingDates(outputPath: string, data: ExportData): Promise<void> {
+  const menusDir = join(resolve(outputPath), "menus");
+  let entries: string[];
+  try {
+    entries = await readdir(menusDir);
+  } catch (error) {
+    if (error instanceof Error && "code" in error && error.code === "ENOENT") return;
+    throw error;
+  }
+
+  for (const entry of entries) {
+    if (!entry.endsWith(".json")) continue;
+    const date = entry.slice(0, -".json".length);
+    if (!DATE_RE.test(date) || data.menus.has(date)) continue;
+    try {
+      const menu = JSON.parse(await readFile(join(menusDir, entry), "utf8")) as DateMenu;
+      if (menu.date !== date || !Array.isArray(menu.types)) continue;
+      data.menus.set(date, menu);
+    } catch {
+      console.warn(`Skipping unreadable existing menu: ${entry}`);
+    }
+  }
+
+  data.manifest.available_dates = [...data.menus.keys()].sort();
+}
+
 async function writeExport(outputPath: string, data: ExportData): Promise<void> {
   const output = resolve(outputPath);
   const parent = dirname(output);
@@ -256,6 +284,7 @@ async function main(): Promise<void> {
   const output = outputArgument(process.argv.slice(2));
   const result = await crawlAll();
   const data = buildExportData(result);
+  await mergeExistingDates(output, data);
   await writeExport(output, data);
   console.log(
     `Exported ${data.manifest.available_dates.length} dates to ${resolve(output)} ` +
