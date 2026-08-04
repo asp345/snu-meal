@@ -30,8 +30,8 @@ jobs:
         run: |
           set -euo pipefail
           REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git clone --depth 1 --filter=blob:none --branch data "$REMOTE" "$RUNNER_TEMP/previous-data"
-          git -C "$RUNNER_TEMP/previous-data" sparse-checkout set menus manifest.json restaurants.json
+          git clone --depth 1 --filter=blob:none --sparse --branch data "$REMOTE" "$RUNNER_TEMP/previous-data"
+          git -C "$RUNNER_TEMP/previous-data" sparse-checkout set menus
           mkdir -p "$RUNNER_TEMP/snu-meal-data/menus"
           cp -R "$RUNNER_TEMP/previous-data/menus/." "$RUNNER_TEMP/snu-meal-data/menus/"
           cp "$RUNNER_TEMP/previous-data/manifest.json" "$RUNNER_TEMP/snu-meal-data/manifest.json"
