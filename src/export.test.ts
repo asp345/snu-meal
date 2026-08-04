@@ -184,7 +184,7 @@ test("merge keeps dates missing from the new crawl", async () => {
         },
       ],
     });
-    await mergeExistingDates(dir, data);
+    await mergeExistingDates(dir, data, new Date("2026-07-21T00:00:00.000Z"));
 
     assert.deepEqual(data.manifest.available_dates, ["2026-07-20", "2026-07-21"]);
     assert.equal(data.menus.get("2026-07-20")?.types[0].type, "LU");
@@ -216,10 +216,71 @@ test("merge replaces dates present in the new crawl and skips bad files", async 
         },
       ],
     });
-    await mergeExistingDates(dir, data);
+    await mergeExistingDates(dir, data, new Date("2026-07-21T00:00:00.000Z"));
 
     assert.deepEqual(data.manifest.available_dates, ["2026-07-21"]);
     assert.equal(data.menus.get("2026-07-21")?.types[0].type, "LU");
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("merge drops stale dates outside the crawl window", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "snu-meal-test-"));
+  try {
+    const menusDir = join(dir, "menus");
+    await mkdir(menusDir, { recursive: true });
+    for (const [date, body] of [
+      ["2026-06-15", { type: "LU", menus: ["옛날메뉴"] }],
+      ["2026-07-20", { type: "LU", menus: ["저번주메뉴"] }],
+      ["2026-07-27", { type: "LU", menus: ["이번주메뉴"] }],
+    ] as const) {
+      await writeFile(
+        join(menusDir, `${date}.json`),
+        JSON.stringify({
+          date,
+          types: [
+            {
+              type: body.type,
+              buildings: [
+                {
+                  building_number: "85동",
+                  venues: [
+                    {
+                      name: null,
+                      restaurants: [
+                        {
+                          code: "vet",
+                          name: "수의대식당",
+                          fixed_menu: false,
+                          meals: [{ price: null, no_meat: false, menus: body.menus }],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        }),
+      );
+    }
+
+    const data = buildExportData({
+      sourceCounts: { snuco: 0, snudorm: 0, vet: 1 },
+      payloads: [
+        {
+          restaurant: "수의대식당",
+          date: "2026-07-28",
+          type: "LU",
+          meals: [{ price: null, no_meat: false, menus: ["오늘메뉴"] }],
+        },
+      ],
+    });
+    await mergeExistingDates(dir, data, new Date("2026-07-28T00:00:00.000Z"));
+
+    assert.deepEqual(data.manifest.available_dates, ["2026-07-27", "2026-07-28"]);
+    assert.equal(data.menus.get("2026-07-27")?.types[0].type, "LU");
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

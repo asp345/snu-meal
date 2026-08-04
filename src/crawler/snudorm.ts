@@ -200,9 +200,10 @@ export async function crawlSnudorm(dates: string[]): Promise<Payload[]> {
         const html = await fetchText(url, { userAgent: SNU_BROWSER_USER_AGENT });
         return buildSnudormPayloads(html, date);
       } catch (error) {
-        throw new Error(
-          `SNUDORM ${date} failed: ${error instanceof Error ? error.message : String(error)}`,
+        console.warn(
+          `SKIP SNUDORM ${date}: ${error instanceof Error ? error.message : String(error)}`,
         );
+        return [];
       }
     }),
   );

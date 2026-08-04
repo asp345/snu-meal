@@ -453,9 +453,10 @@ export async function crawlSnuco(dates: string[]): Promise<Payload[]> {
         });
         return buildSnucoPayloads(html, date);
       } catch (error) {
-        throw new Error(
-          `SNUCO ${date} failed: ${error instanceof Error ? error.message : String(error)}`,
+        console.warn(
+          `SKIP SNUCO ${date}: ${error instanceof Error ? error.message : String(error)}`,
         );
+        return [];
       }
     }),
   );

@@ -3,6 +3,12 @@ import { mkdir, readFile, readdir, rename, rm, writeFile } from "node:fs/promise
 import { basename, dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { crawlAll } from "./crawler/index.js";
+import {
+  addDays,
+  kstDate,
+  MENU_WINDOW_FUTURE_DAYS,
+  MENU_WINDOW_PAST_DAYS,
+} from "./crawler/dates.js";
 import { MEAL_TYPES, type CrawlResult, type Meal, type MealType, type Payload } from "./model.js";
 import { findRestaurant, RESTAURANTS } from "./registry.js";
 
@@ -206,7 +212,14 @@ function json(value: unknown): string {
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-export async function mergeExistingDates(outputPath: string, data: ExportData): Promise<void> {
+export async function mergeExistingDates(
+  outputPath: string,
+  data: ExportData,
+  now: Date = new Date(),
+): Promise<void> {
+  const today = kstDate(now);
+  const minDate = addDays(today, -MENU_WINDOW_PAST_DAYS);
+  const maxDate = addDays(today, MENU_WINDOW_FUTURE_DAYS);
   const menusDir = join(resolve(outputPath), "menus");
   let entries: string[];
   try {
@@ -220,6 +233,7 @@ export async function mergeExistingDates(outputPath: string, data: ExportData): 
     if (!entry.endsWith(".json")) continue;
     const date = entry.slice(0, -".json".length);
     if (!DATE_RE.test(date) || data.menus.has(date)) continue;
+    if (date < minDate || date > maxDate) continue;
     try {
       const menu = JSON.parse(await readFile(join(menusDir, entry), "utf8")) as DateMenu;
       if (menu.date !== date || !Array.isArray(menu.types)) continue;

@@ -18,7 +18,12 @@ export function addDays(date: string, days: number): string {
   return shifted.toISOString().slice(0, 10);
 }
 
+export const MENU_WINDOW_PAST_DAYS = 7;
+export const MENU_WINDOW_FUTURE_DAYS = 7;
+
 export function menuDates(now: Date = new Date()): string[] {
   const today = kstDate(now);
-  return Array.from({ length: 8 }, (_, offset) => addDays(today, offset));
+  return Array.from({ length: MENU_WINDOW_PAST_DAYS + 1 + MENU_WINDOW_FUTURE_DAYS }, (_, offset) =>
+    addDays(today, offset - MENU_WINDOW_PAST_DAYS),
+  );
 }

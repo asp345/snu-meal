@@ -15,7 +15,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
         with:
@@ -24,18 +24,31 @@ jobs:
         with:
           node-version: 26
       - run: npm ci
+      - name: Fetch previous data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git clone --depth 1 --filter=blob:none --branch data "$REMOTE" "$RUNNER_TEMP/previous-data"
+          git -C "$RUNNER_TEMP/previous-data" sparse-checkout set menus manifest.json restaurants.json
+          mkdir -p "$RUNNER_TEMP/snu-meal-data/menus"
+          cp -R "$RUNNER_TEMP/previous-data/menus/." "$RUNNER_TEMP/snu-meal-data/menus/"
+          cp "$RUNNER_TEMP/previous-data/manifest.json" "$RUNNER_TEMP/snu-meal-data/manifest.json"
+          cp "$RUNNER_TEMP/previous-data/restaurants.json" "$RUNNER_TEMP/snu-meal-data/restaurants.json"
       - name: Crawl and export
         run: npm run export -- --output "$RUNNER_TEMP/snu-meal-data"
       - name: Publish data branch
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout --orphan data-publish
-          git rm -rf --ignore-unmatch .
-          cp -R "$RUNNER_TEMP/snu-meal-data/." .
-          git add --all
-          git commit -m "Update meal data"
-          git push --force origin HEAD:data
+          set -euo pipefail
+          REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git init --initial-branch=data-publish "$RUNNER_TEMP/publish-data"
+          git -C "$RUNNER_TEMP/publish-data" config user.name "github-actions[bot]"
+          git -C "$RUNNER_TEMP/publish-data" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp -R "$RUNNER_TEMP/snu-meal-data/." "$RUNNER_TEMP/publish-data/"
+          git -C "$RUNNER_TEMP/publish-data" add --all
+          git -C "$RUNNER_TEMP/publish-data" commit -m "Update meal data"
+          git -C "$RUNNER_TEMP/publish-data" remote add origin "$REMOTE"
+          git -C "$RUNNER_TEMP/publish-data" push --force origin HEAD:data
