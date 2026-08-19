@@ -5,16 +5,29 @@ export function dateFromIso(value: string): Date {
   return new Date(year, month - 1, day);
 }
 
-export function localIsoDate(): string {
-  const now = new Date();
-  const year = String(now.getFullYear());
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
+// Use KST (Asia/Seoul) to align with crawler dates in src/crawler/dates.ts:1.
+const KST_FORMATTER = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Seoul",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  hour12: false,
+});
+
+function kstParts(now: Date = new Date()): Record<string, string> {
+  return Object.fromEntries(
+    KST_FORMATTER.formatToParts(now).map(({ type, value }) => [type, value]),
+  );
 }
 
-export function initialMealType(): MealType {
-  const hour = new Date().getHours();
+export function localIsoDate(now: Date = new Date()): string {
+  const parts = kstParts(now);
+  return `${parts.year}-${parts.month}-${parts.day}`;
+}
+
+export function initialMealType(now: Date = new Date()): MealType {
+  const hour = Number.parseInt(kstParts(now).hour, 10);
   if (hour < 10) return "BR";
   if (hour < 16) return "LU";
   return "DN";

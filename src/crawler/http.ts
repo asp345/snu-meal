@@ -13,6 +13,8 @@ export interface FetchTextOptions {
   insecureSnucoTls?: boolean;
 }
 
+// RFC 7231 Section 3.1.1.5: charset is a parameter of Content-Type `type/subtype; charset=...`.
+// Header lookup is case-insensitive; Node normalizes to lower-case keys.
 function charsetFromHeaders(headers: IncomingHttpHeaders): string | undefined {
   const contentType = headers["content-type"];
   const value = Array.isArray(contentType) ? contentType[0] : contentType;
@@ -21,6 +23,7 @@ function charsetFromHeaders(headers: IncomingHttpHeaders): string | undefined {
 
 function decodeBody(body: Buffer, headers: IncomingHttpHeaders): string {
   const headerCharset = charsetFromHeaders(headers);
+  // Scan only head for meta charset to avoid full decode; 8 KiB covers <head>.
   const head = body.subarray(0, 8192).toString("latin1");
   const metaCharset = head.match(/charset\s*=\s*["']?\s*([A-Za-z0-9_-]+)/i)?.[1];
   const charset = headerCharset ?? metaCharset ?? "utf-8";
@@ -52,6 +55,8 @@ export function fetchText(
       parsedUrl,
       {
         headers: options.userAgent ? { "user-agent": options.userAgent } : undefined,
+        // snuco.snu.ac.kr presents a certificate chain not verifiable by Node's default CA bundle.
+        // Disable verification only for that host when explicitly requested.
         rejectUnauthorized: !(options.insecureSnucoTls && parsedUrl.hostname === "snuco.snu.ac.kr"),
       },
       (response) => {

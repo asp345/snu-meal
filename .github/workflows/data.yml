@@ -23,6 +23,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 26
+          cache: npm
       - run: npm ci
       - name: Fetch previous data
         env:
@@ -47,7 +48,9 @@ jobs:
           git init --initial-branch=data-publish "$RUNNER_TEMP/publish-data"
           git -C "$RUNNER_TEMP/publish-data" config user.name "github-actions[bot]"
           git -C "$RUNNER_TEMP/publish-data" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          cp -R "$RUNNER_TEMP/snu-meal-data/." "$RUNNER_TEMP/publish-data/"
+          cp "$RUNNER_TEMP/snu-meal-data/manifest.json" "$RUNNER_TEMP/publish-data/manifest.json"
+          cp "$RUNNER_TEMP/snu-meal-data/restaurants.json" "$RUNNER_TEMP/publish-data/restaurants.json"
+          cp -R "$RUNNER_TEMP/snu-meal-data/menus" "$RUNNER_TEMP/publish-data/menus"
           git -C "$RUNNER_TEMP/publish-data" add --all
           git -C "$RUNNER_TEMP/publish-data" commit -m "Update meal data"
           git -C "$RUNNER_TEMP/publish-data" remote add origin "$REMOTE"

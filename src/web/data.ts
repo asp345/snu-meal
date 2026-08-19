@@ -10,13 +10,19 @@ export async function fetchJson<T>(url: string): Promise<T> {
 
 export async function resolveDataBase(): Promise<string> {
   if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return "./data";
-  const commit = await fetchJson<{ sha?: unknown }>(
-    `https://api.github.com/repos/${REPOSITORY}/commits/data`,
-  );
-  if (typeof commit.sha !== "string" || !/^[0-9a-f]{40}$/i.test(commit.sha)) {
-    throw new Error("올바른 데이터 커밋을 찾지 못했습니다.");
+  try {
+    const commit = await fetchJson<{ sha?: unknown }>(
+      `https://api.github.com/repos/${REPOSITORY}/commits/data`,
+    );
+    if (typeof commit.sha !== "string" || !/^[0-9a-f]{40}$/i.test(commit.sha)) {
+      throw new Error("Invalid commit sha");
+    }
+    return `https://raw.githubusercontent.com/${REPOSITORY}/${commit.sha}`;
+  } catch {
+    // GitHub API is rate-limited to 60 req/h unauthenticated (docs.github.com/en/rest/using-the-rest-api/rate-limits).
+    // Fall back to the branch tip which is cacheable via raw.githubusercontent and works without API.
+    return `https://raw.githubusercontent.com/${REPOSITORY}/data`;
   }
-  return `https://raw.githubusercontent.com/${REPOSITORY}/${commit.sha}`;
 }
 
 export async function loadManifest(dataBase: string): Promise<Manifest> {

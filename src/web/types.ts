@@ -1,4 +1,6 @@
-export type MealType = "BR" | "LU" | "DN";
+import type { Meal, MealType } from "../model.js";
+
+export type { Meal, MealType };
 
 export interface Manifest {
   schema_version: 2;
@@ -9,12 +11,6 @@ export interface Manifest {
     snudorm: number;
     vet: number;
   };
-}
-
-export interface Meal {
-  price: number | null;
-  no_meat: boolean;
-  menus: string[];
 }
 
 export interface Restaurant {
