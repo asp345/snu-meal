@@ -1,0 +1,314 @@
+{
+  "date": "2026-08-22",
+  "types": [
+    {
+      "type": "BR",
+      "buildings": [
+        {
+          "building_number": "220동",
+          "venues": [
+            {
+              "name": "구시아 푸드코트",
+              "restaurants": [
+                {
+                  "code": "building_220_kitchen101",
+                  "name": "키친101",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 4900,
+                      "no_meat": false,
+                      "menus": [
+                        "키친101 비빔밥(야채)"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "육회 비빔밥(S)"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "육회 비빔밥(L)"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어 비빔밥(S)"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어 비빔밥(L)"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "돈육불고기 비빔밥"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "장어비빔밥"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 5000,
+                      "no_meat": false,
+                      "menus": [
+                        "콘스프",
+                        "무채어묵국",
+                        "알감자버터구이",
+                        "계란후라이",
+                        "토스트",
+                        "씨리얼",
+                        "흰우유",
+                        "두유",
+                        "그린샐러드"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "LU",
+      "buildings": [
+        {
+          "building_number": "220동",
+          "venues": [
+            {
+              "name": "구시아 푸드코트",
+              "restaurants": [
+                {
+                  "code": "building_220_kitchen101",
+                  "name": "키친101",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 4900,
+                      "no_meat": false,
+                      "menus": [
+                        "키친101 비빔밥(야채)"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "육회 비빔밥(S)"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "육회 비빔밥(L)"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어 비빔밥(S)"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어 비빔밥(L)"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "돈육불고기 비빔밥"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "장어비빔밥"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "김치말이국수",
+                        "숯불고기"
+                      ]
+                    },
+                    {
+                      "price": 4000,
+                      "no_meat": false,
+                      "menus": [
+                        "버팔로윙"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "DN",
+      "buildings": [
+        {
+          "building_number": "220동",
+          "venues": [
+            {
+              "name": "구시아 푸드코트",
+              "restaurants": [
+                {
+                  "code": "building_220_kitchen101",
+                  "name": "키친101",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 4900,
+                      "no_meat": false,
+                      "menus": [
+                        "키친101 비빔밥(야채)"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "육회 비빔밥(S)"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "육회 비빔밥(L)"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어 비빔밥(S)"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어 비빔밥(L)"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "돈육불고기 비빔밥"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "장어비빔밥"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "치킨마요덮밥",
+                        "군만두"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "순살햄후라이"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
