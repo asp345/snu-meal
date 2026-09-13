@@ -1,0 +1,523 @@
+{
+  "date": "2026-09-12",
+  "types": [
+    {
+      "type": "BR",
+      "buildings": [
+        {
+          "building_number": "220동",
+          "venues": [
+            {
+              "name": "구시아 푸드코트",
+              "restaurants": [
+                {
+                  "code": "building_220_katsu",
+                  "name": "경성 돈카츠",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "냉모밀"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "새우튀김카레우동"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "등심까츠"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "특 등심 왕돈까스"
+                      ]
+                    },
+                    {
+                      "price": 8200,
+                      "no_meat": false,
+                      "menus": [
+                        "새우튀김옛날 등심돈까스"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "치즈돈까스"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "고구마 치즈돈까스"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "새우튀김 카레라이스"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "카레돈가츠"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "돈가스 카레우동"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "눈꽃치즈 돈까스"
+                      ]
+                    },
+                    {
+                      "price": 7100,
+                      "no_meat": false,
+                      "menus": [
+                        "소세지 카레라이스"
+                      ]
+                    },
+                    {
+                      "price": 1600,
+                      "no_meat": false,
+                      "menus": [
+                        "옥수수 감자고로케 2P"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "code": "building_220_kitchen101",
+                  "name": "키친101",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 4900,
+                      "no_meat": false,
+                      "menus": [
+                        "키친101 비빔밥(야채)"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "육회 비빔밥(S)"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "육회 비빔밥(L)"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어 비빔밥(S)"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어 비빔밥(L)"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "장어비빔밥"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "연두부튀김포케"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어샐러드포케"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "훈제오리포케"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 5000,
+                      "no_meat": false,
+                      "menus": [
+                        "콘스프",
+                        "수제비국",
+                        "두부강정",
+                        "삶은계란",
+                        "소금",
+                        "토스트",
+                        "씨리얼",
+                        "흰우유",
+                        "두유",
+                        "그린샐러드"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "LU",
+      "buildings": [
+        {
+          "building_number": "63동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "student_union",
+                  "name": "학생회관식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "지코바치밥"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "220동",
+          "venues": [
+            {
+              "name": "구시아 푸드코트",
+              "restaurants": [
+                {
+                  "code": "building_220_katsu",
+                  "name": "경성 돈카츠",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "냉모밀"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "새우튀김카레우동"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "등심까츠"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "특 등심 왕돈까스"
+                      ]
+                    },
+                    {
+                      "price": 8200,
+                      "no_meat": false,
+                      "menus": [
+                        "새우튀김옛날 등심돈까스"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "치즈돈까스"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "고구마 치즈돈까스"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "새우튀김 카레라이스"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "카레돈가츠"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "돈가스 카레우동"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "눈꽃치즈 돈까스"
+                      ]
+                    },
+                    {
+                      "price": 7100,
+                      "no_meat": false,
+                      "menus": [
+                        "소세지 카레라이스"
+                      ]
+                    },
+                    {
+                      "price": 1600,
+                      "no_meat": false,
+                      "menus": [
+                        "옥수수 감자고로케 2P"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "code": "building_220_kitchen101",
+                  "name": "키친101",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 4900,
+                      "no_meat": false,
+                      "menus": [
+                        "키친101 비빔밥(야채)"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "육회 비빔밥(S)"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "육회 비빔밥(L)"
+                      ]
+                    },
+                    {
+                      "price": 6900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어 비빔밥(S)"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어 비빔밥(L)"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "장어비빔밥"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "연두부튀김포케"
+                      ]
+                    },
+                    {
+                      "price": 8900,
+                      "no_meat": false,
+                      "menus": [
+                        "연어샐러드포케"
+                      ]
+                    },
+                    {
+                      "price": 7900,
+                      "no_meat": false,
+                      "menus": [
+                        "훈제오리포케"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "눈꽃치즈통치킨까스",
+                        "크림스프"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "소떡소떡"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "DN",
+      "buildings": [
+        {
+          "building_number": "63동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "student_union",
+                  "name": "학생회관식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "목살김치찌개"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "901동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "ourhome",
+                  "name": "아워홈",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "양지육개장",
+                        "당면사리",
+                        "프리미엄동그랑땡"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "츄러스",
+                        "초코소스"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
