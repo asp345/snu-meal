@@ -18,6 +18,10 @@ export const SPLIT_RE = /\s*[,&*]\s*/;
 export const SPLIT_PLUS_RE = /\s*[,&+*]\s*/;
 export const SPLIT_DORM_RE = /\s*[,/&*]\s*/;
 
+// Observed source typo: an extra zero ("호구세트 : 8,3000원").
+// Campus menus stay far below this limit, so larger values divisible by 10 are corrected.
+const MAX_MENU_PRICE = 50_000;
+
 export function normalizeLine(line: string): string {
   return line.replace(/\s+/g, " ").trim();
 }
@@ -33,6 +37,12 @@ export function normalizeNames(text: string, split = SPLIT_RE): string[] {
     .filter(Boolean);
 }
 
+export function normalizePrice(price: number): number {
+  let corrected = price;
+  while (corrected > MAX_MENU_PRICE && corrected % 10 === 0) corrected /= 10;
+  return corrected;
+}
+
 export function parsePriceLine(
   line: string,
   pattern = PRICE_RE,
@@ -44,7 +54,7 @@ export function parsePriceLine(
   const menus = normalizeNames(match[1], split);
   if (menus.length === 0) return undefined;
   return {
-    price: Number.parseInt(match[2].replaceAll(",", ""), 10),
+    price: normalizePrice(Number.parseInt(match[2].replaceAll(",", ""), 10)),
     no_meat: hasNoMeat,
     menus,
   };

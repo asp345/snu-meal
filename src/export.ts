@@ -212,11 +212,27 @@ function json(value: unknown): string {
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-export async function mergeExistingDates(
+export function combinePayloads(
+  fresh: Payload[],
+  existing: Payload[],
+  failedSources: CrawlResult["failedSources"],
+): Payload[] {
+  const failed = new Set(failedSources);
+  const slot = (payload: Payload): string =>
+    [payload.restaurant, payload.date, payload.type].join("\u0000");
+  const slots = new Set(fresh.map(slot));
+  return fresh.concat(
+    existing.filter((payload) => {
+      const restaurant = findRestaurant(payload.restaurant);
+      return restaurant !== undefined && failed.has(restaurant.source) && !slots.has(slot(payload));
+    }),
+  );
+}
+
+export async function loadExistingPayloads(
   outputPath: string,
-  data: ExportData,
   now: Date = new Date(),
-): Promise<void> {
+): Promise<Payload[]> {
   const today = kstDate(now);
   const minDate = addDays(today, -MENU_WINDOW_PAST_DAYS);
   const maxDate = addDays(today, MENU_WINDOW_FUTURE_DAYS);
@@ -225,25 +241,46 @@ export async function mergeExistingDates(
   try {
     entries = await readdir(menusDir);
   } catch (error) {
-    if (error instanceof Error && "code" in error && error.code === "ENOENT") return;
+    if (error instanceof Error && "code" in error && error.code === "ENOENT") return [];
     throw error;
   }
 
+  const byCode = new Map(RESTAURANTS.map((restaurant) => [restaurant.code, restaurant]));
+  const seen = new Set<string>();
+  const payloads: Payload[] = [];
   for (const entry of entries) {
     if (!entry.endsWith(".json")) continue;
     const date = entry.slice(0, -".json".length);
-    if (!DATE_RE.test(date) || data.menus.has(date)) continue;
-    if (date < minDate || date > maxDate) continue;
+    if (!DATE_RE.test(date) || date < minDate || date > maxDate) continue;
     try {
       const menu = JSON.parse(await readFile(join(menusDir, entry), "utf8")) as DateMenu;
       if (menu.date !== date || !Array.isArray(menu.types)) continue;
-      data.menus.set(date, menu);
+      for (const section of menu.types) {
+        if (!MEAL_TYPES.includes(section.type)) continue;
+        for (const building of section.buildings ?? []) {
+          for (const venue of building?.venues ?? []) {
+            for (const restaurant of venue?.restaurants ?? []) {
+              const candidate: Payload = {
+                restaurant: byCode.get(restaurant?.code)?.name ?? "",
+                date,
+                type: section.type,
+                meals: restaurant?.meals ?? [],
+              };
+              try {
+                validatePayload(candidate, seen);
+                payloads.push(candidate);
+              } catch {
+                console.warn(`Skipping invalid existing menu entry: ${entry}`);
+              }
+            }
+          }
+        }
+      }
     } catch {
       console.warn(`Skipping unreadable existing menu: ${entry}`);
     }
   }
-
-  data.manifest.available_dates = [...data.menus.keys()].sort();
+  return payloads;
 }
 
 async function writeExport(outputPath: string, data: ExportData): Promise<void> {
@@ -297,8 +334,11 @@ function outputArgument(args: string[]): string {
 async function main(): Promise<void> {
   const output = outputArgument(process.argv.slice(2));
   const result = await crawlAll();
-  const data = buildExportData(result);
-  await mergeExistingDates(output, data);
+  const existing = await loadExistingPayloads(output);
+  const data = buildExportData({
+    ...result,
+    payloads: combinePayloads(result.payloads, existing, result.failedSources),
+  });
   await writeExport(output, data);
   console.log(
     `Exported ${data.manifest.available_dates.length} dates to ${resolve(output)} ` +

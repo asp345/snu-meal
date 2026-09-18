@@ -1,6 +1,6 @@
 import { Parser } from "htmlparser2";
 import type { Meal, MealType, Payload } from "../model.js";
-import { normalizeLine, SPLIT_DORM_RE } from "./common.js";
+import { normalizeLine, normalizePrice, SPLIT_DORM_RE } from "./common.js";
 import { fetchText, SNU_BROWSER_USER_AGENT } from "./http.js";
 
 const BASE_URL = "https://snudorm.snu.ac.kr/foodmenu/";
@@ -113,7 +113,10 @@ function mealTypeFromServiceTime(serviceTime: string): MealType | undefined {
 function parseMenuLine(line: string): [string, number | null] {
   const match = PRICE_RE.exec(line);
   if (!match) return [line, null];
-  return [match[1].trim(), Number.parseInt(match[2].replaceAll(",", "").replaceAll("원", ""), 10)];
+  return [
+    match[1].trim(),
+    normalizePrice(Number.parseInt(match[2].replaceAll(",", "").replaceAll("원", ""), 10)),
+  ];
 }
 
 function normalizeMenuNames(text: string, type: MealType, cafeteria: DormCafeteria): string[] {

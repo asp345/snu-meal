@@ -41,3 +41,26 @@ test("duplicate cafeteria rows keep the last menu", () => {
   assert.equal(payloads[0].restaurant, "220동식당 경성 돈카츠");
   assert.deepEqual(payloads[0].meals, [{ price: 2000, no_meat: false, menus: ["Current menu"] }]);
 });
+
+test("burgerun fixed menu takes the first price", () => {
+  const html = `<table class="menu-table"><tbody><tr>
+    <td class="title">* 버거운버거 (878-9288)</td>
+    <td class="lunch">
+      <p>&lt;BURGER&gt;</p>
+      <p>불고기버거 : 4,400원 / 6,900원 / 매운맛 변경 +300원</p>
+      <p>한입떡복이 세트 - 16,700원</p>
+      <p>후라이드치킨 : 10,900원 / 순살 변경 + 1,000원</p>
+      <p>※ 운영시간 : 09:00~20:00</p>
+    </td>
+  </tr></tbody></table>`;
+
+  const payloads = buildSnucoPayloads(html, "2026-07-23");
+
+  assert.equal(payloads.length, 1);
+  assert.equal(payloads[0].restaurant, "버거운버거");
+  assert.deepEqual(payloads[0].meals, [
+    { price: 4400, no_meat: false, menus: ["불고기버거"] },
+    { price: 16700, no_meat: false, menus: ["한입떡복이 세트"] },
+    { price: 10900, no_meat: false, menus: ["후라이드치킨"] },
+  ]);
+});

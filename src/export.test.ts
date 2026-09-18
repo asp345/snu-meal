@@ -3,13 +3,14 @@ import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import type { CrawlResult } from "./model.js";
-import { buildExportData, mergeExistingDates } from "./export.js";
+import type { CrawlResult, Payload } from "./model.js";
+import { buildExportData, combinePayloads, loadExistingPayloads } from "./export.js";
 import { RESTAURANTS } from "./registry.js";
 
 test("export data is grouped in meal, building, and registry order", () => {
   const result: CrawlResult = {
     sourceCounts: { snuco: 2, snudorm: 1, vet: 0 },
+    failedSources: [],
     payloads: [
       {
         restaurant: "두레미담 식당",
@@ -75,6 +76,7 @@ test("export separates venues and keeps their counters together", () => {
   ];
   const data = buildExportData({
     sourceCounts: { snuco: restaurantNames.length, snudorm: 0, vet: 0 },
+    failedSources: [],
     payloads: restaurantNames.map((restaurant) => ({
       restaurant,
       date: "2026-07-18",
@@ -124,6 +126,7 @@ test("export rejects crawler restaurants outside the registry", () => {
     () =>
       buildExportData({
         sourceCounts: { snuco: 1, snudorm: 0, vet: 0 },
+        failedSources: [],
         payloads: [
           {
             restaurant: "알 수 없는 식당",
@@ -137,151 +140,154 @@ test("export rejects crawler restaurants outside the registry", () => {
   );
 });
 
-test("merge keeps dates missing from the new crawl", async () => {
-  const dir = await mkdtemp(join(tmpdir(), "snu-meal-test-"));
-  try {
-    const menusDir = join(dir, "menus");
-    await mkdir(menusDir, { recursive: true });
-    const oldDate = "2026-07-20";
-    await writeFile(
-      join(menusDir, `${oldDate}.json`),
-      JSON.stringify({
-        date: oldDate,
-        types: [
-          {
-            type: "LU",
-            buildings: [
-              {
-                building_number: "85동",
-                venues: [
-                  {
-                    name: null,
-                    restaurants: [
-                      {
-                        code: "vet",
-                        name: "수의대식당",
-                        fixed_menu: false,
-                        meals: [{ price: null, no_meat: false, menus: ["소불고기덮밥"] }],
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      }),
-    );
-
-    const data = buildExportData({
-      sourceCounts: { snuco: 1, snudorm: 0, vet: 0 },
-      payloads: [
+async function writeOldMenu(
+  menusDir: string,
+  date: string,
+  restaurant: { code: string; name: string; menus: string[] },
+): Promise<void> {
+  await writeFile(
+    join(menusDir, `${date}.json`),
+    JSON.stringify({
+      date,
+      types: [
         {
-          restaurant: "수의대식당",
-          date: "2026-07-21",
           type: "LU",
-          meals: [{ price: null, no_meat: false, menus: ["제육볶음"] }],
-        },
-      ],
-    });
-    await mergeExistingDates(dir, data, new Date("2026-07-21T00:00:00.000Z"));
-
-    assert.deepEqual(data.manifest.available_dates, ["2026-07-20", "2026-07-21"]);
-    assert.equal(data.menus.get("2026-07-20")?.types[0].type, "LU");
-    assert.equal(data.menus.get("2026-07-21")?.types[0].type, "LU");
-  } finally {
-    await rm(dir, { recursive: true, force: true });
-  }
-});
-
-test("merge replaces dates present in the new crawl and skips bad files", async () => {
-  const dir = await mkdtemp(join(tmpdir(), "snu-meal-test-"));
-  try {
-    const menusDir = join(dir, "menus");
-    await mkdir(menusDir, { recursive: true });
-    await writeFile(join(menusDir, "2026-07-20.json"), "{ not json");
-    await writeFile(
-      join(menusDir, "2026-07-21.json"),
-      JSON.stringify({ date: "2026-07-21", types: [{ type: "BR", buildings: [] }] }),
-    );
-
-    const data = buildExportData({
-      sourceCounts: { snuco: 1, snudorm: 0, vet: 0 },
-      payloads: [
-        {
-          restaurant: "수의대식당",
-          date: "2026-07-21",
-          type: "LU",
-          meals: [{ price: null, no_meat: false, menus: ["제육볶음"] }],
-        },
-      ],
-    });
-    await mergeExistingDates(dir, data, new Date("2026-07-21T00:00:00.000Z"));
-
-    assert.deepEqual(data.manifest.available_dates, ["2026-07-21"]);
-    assert.equal(data.menus.get("2026-07-21")?.types[0].type, "LU");
-  } finally {
-    await rm(dir, { recursive: true, force: true });
-  }
-});
-
-test("merge drops stale dates outside the crawl window", async () => {
-  const dir = await mkdtemp(join(tmpdir(), "snu-meal-test-"));
-  try {
-    const menusDir = join(dir, "menus");
-    await mkdir(menusDir, { recursive: true });
-    for (const [date, body] of [
-      ["2026-06-15", { type: "LU", menus: ["옛날메뉴"] }],
-      ["2026-07-20", { type: "LU", menus: ["저번주메뉴"] }],
-      ["2026-07-27", { type: "LU", menus: ["이번주메뉴"] }],
-    ] as const) {
-      await writeFile(
-        join(menusDir, `${date}.json`),
-        JSON.stringify({
-          date,
-          types: [
+          buildings: [
             {
-              type: body.type,
-              buildings: [
+              building_number: "85동",
+              venues: [
                 {
-                  building_number: "85동",
-                  venues: [
+                  name: null,
+                  restaurants: [
                     {
-                      name: null,
-                      restaurants: [
-                        {
-                          code: "vet",
-                          name: "수의대식당",
-                          fixed_menu: false,
-                          meals: [{ price: null, no_meat: false, menus: body.menus }],
-                        },
-                      ],
+                      code: restaurant.code,
+                      name: restaurant.name,
+                      fixed_menu: false,
+                      meals: [{ price: null, no_meat: false, menus: restaurant.menus }],
                     },
                   ],
                 },
               ],
             },
           ],
-        }),
-      );
-    }
-
-    const data = buildExportData({
-      sourceCounts: { snuco: 0, snudorm: 0, vet: 1 },
-      payloads: [
-        {
-          restaurant: "수의대식당",
-          date: "2026-07-28",
-          type: "LU",
-          meals: [{ price: null, no_meat: false, menus: ["오늘메뉴"] }],
         },
       ],
-    });
-    await mergeExistingDates(dir, data, new Date("2026-07-28T00:00:00.000Z"));
+    }),
+  );
+}
 
-    assert.deepEqual(data.manifest.available_dates, ["2026-07-27", "2026-07-28"]);
-    assert.equal(data.menus.get("2026-07-27")?.types[0].type, "LU");
+test("failed sources carry existing payloads into the new export", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "snu-meal-test-"));
+  try {
+    const menusDir = join(dir, "menus");
+    await mkdir(menusDir, { recursive: true });
+    await writeOldMenu(menusDir, "2026-07-20", {
+      code: "vet",
+      name: "수의대식당",
+      menus: ["소불고기덮밥"],
+    });
+
+    const fresh: Payload[] = [
+      {
+        restaurant: "수의대식당",
+        date: "2026-07-21",
+        type: "LU",
+        meals: [{ price: null, no_meat: false, menus: ["제육볶음"] }],
+      },
+    ];
+    const existing = await loadExistingPayloads(dir, new Date("2026-07-21T00:00:00.000Z"));
+    const data = buildExportData({
+      payloads: combinePayloads(fresh, existing, ["vet"]),
+      sourceCounts: { snuco: 0, snudorm: 0, vet: 1 },
+      failedSources: ["vet"],
+    });
+
+    assert.deepEqual(data.manifest.available_dates, ["2026-07-20", "2026-07-21"]);
+    assert.deepEqual(
+      data.menus.get("2026-07-20")?.types[0].buildings[0].venues[0].restaurants[0].meals,
+      [{ price: null, no_meat: false, menus: ["소불고기덮밥"] }],
+    );
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
+});
+
+test("successful sources refresh overlapping dates and bad files are skipped", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "snu-meal-test-"));
+  try {
+    const menusDir = join(dir, "menus");
+    await mkdir(menusDir, { recursive: true });
+    await writeOldMenu(menusDir, "2026-07-21", {
+      code: "vet",
+      name: "수의대식당",
+      menus: ["옛날메뉴"],
+    });
+    await writeOldMenu(menusDir, "2026-07-22", {
+      code: "removed",
+      name: "사라진식당",
+      menus: ["메뉴"],
+    });
+    await writeOldMenu(menusDir, "2026-06-15", {
+      code: "vet",
+      name: "수의대식당",
+      menus: ["창고메뉴"],
+    });
+    await writeFile(join(menusDir, "2026-07-23.json"), "{ not json");
+
+    const fresh: Payload[] = [
+      {
+        restaurant: "수의대식당",
+        date: "2026-07-21",
+        type: "LU",
+        meals: [{ price: null, no_meat: false, menus: ["오늘메뉴"] }],
+      },
+    ];
+    const existing = await loadExistingPayloads(dir, new Date("2026-07-21T00:00:00.000Z"));
+    const data = buildExportData({
+      payloads: combinePayloads(fresh, existing, []),
+      sourceCounts: { snuco: 0, snudorm: 0, vet: 1 },
+      failedSources: [],
+    });
+
+    assert.deepEqual(data.manifest.available_dates, ["2026-07-21"]);
+    assert.deepEqual(
+      data.menus.get("2026-07-21")?.types[0].buildings[0].venues[0].restaurants[0].meals,
+      [{ price: null, no_meat: false, menus: ["오늘메뉴"] }],
+    );
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});
+
+test("combine keeps fresh payloads and carries only failed sources", () => {
+  const fresh: Payload[] = [
+    {
+      restaurant: "학생회관식당",
+      date: "2026-07-21",
+      type: "LU",
+      meals: [{ price: 6000, no_meat: false, menus: ["비빔밥"] }],
+    },
+  ];
+  const existing: Payload[] = [
+    {
+      restaurant: "학생회관식당",
+      date: "2026-07-21",
+      type: "LU",
+      meals: [{ price: 5000, no_meat: false, menus: ["옛날메뉴"] }],
+    },
+    {
+      restaurant: "아워홈",
+      date: "2026-07-21",
+      type: "LU",
+      meals: [{ price: 6000, no_meat: false, menus: ["유지메뉴"] }],
+    },
+    {
+      restaurant: "수의대식당",
+      date: "2026-07-21",
+      type: "LU",
+      meals: [{ price: null, no_meat: false, menus: ["버려지는메뉴"] }],
+    },
+  ];
+
+  assert.deepEqual(combinePayloads(fresh, existing, ["snuco", "snudorm"]), [fresh[0], existing[1]]);
 });

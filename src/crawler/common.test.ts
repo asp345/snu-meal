@@ -1,6 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { normalizeNames, OPTIONAL_COLON_PRICE_RE, parsePriceLine } from "./common.js";
+import {
+  normalizeNames,
+  normalizePrice,
+  OPTIONAL_COLON_PRICE_RE,
+  parsePriceLine,
+} from "./common.js";
 
 test("common price and name parsing", () => {
   assert.deepEqual(parsePriceLine("제육볶음 & 된장국(#) : 6,000원"), {
@@ -30,4 +35,13 @@ test("common price and name parsing", () => {
   });
   assert.deepEqual(normalizeNames(" 김밥[#], 라면 * 단무지 "), ["김밥", "라면", "단무지"]);
   assert.equal(parsePriceLine("가격 없음"), undefined);
+});
+
+test("extra zero price typos are corrected", () => {
+  assert.equal(normalizePrice(8300), 8300);
+  assert.deepEqual(parsePriceLine("호구세트 : 8,3000원"), {
+    price: 8300,
+    no_meat: false,
+    menus: ["호구세트"],
+  });
 });

@@ -28,6 +28,7 @@ test("crawler failures warn without discarding successful results", async () => 
     ["SNUCO", "VET"],
   );
   assert.deepEqual(result.sourceCounts, { snuco: 1, snudorm: 0, vet: 1 });
+  assert.deepEqual(result.failedSources, ["snudorm"]);
   assert.equal(warnings.length, 1);
   assert.equal(warnings[0].source, "snudorm");
   assert.match(String(warnings[0].error), /HTTP 503/);

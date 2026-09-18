@@ -11,6 +11,7 @@ import {
   groupedPayloads,
   normalizeLine,
   normalizeNames,
+  normalizePrice,
   parsePriceLine,
   pushMeal,
   sectionKey,
@@ -20,7 +21,7 @@ import {
 import { fetchText, SNU_BROWSER_USER_AGENT } from "./http.js";
 
 const BASE_URL = "https://snuco.snu.ac.kr/foodmenu/";
-const EXCLUDED_RESTAURANTS = new Set(["기숙사식당", "버거운버거"]);
+const EXCLUDED_RESTAURANTS = new Set(["기숙사식당"]);
 
 type Generalizer = (cells: MealCell[]) => GeneralizedMeals[];
 
@@ -169,7 +170,9 @@ function duremidam(cells: MealCell[]): GeneralizedMeals[] {
         if (key === "셀프코너") {
           restaurant = "두레미담 셀프코너";
           const price = /^([\d,]+)\s*원/.exec(section[2].trim());
-          buffetPrice = price ? Number.parseInt(price[1].replaceAll(",", ""), 10) : null;
+          buffetPrice = price
+            ? normalizePrice(Number.parseInt(price[1].replaceAll(",", ""), 10))
+            : null;
         } else if (key === "주문식메뉴") {
           restaurant = "두레미담 식당";
         } else {
@@ -234,7 +237,7 @@ function dong302(cells: MealCell[]): GeneralizedMeals[] {
       const buffet = buffetPattern.exec(line);
       if (buffet) {
         flush();
-        buffetPrice = Number.parseInt(buffet[1].replaceAll(",", ""), 10);
+        buffetPrice = normalizePrice(Number.parseInt(buffet[1].replaceAll(",", ""), 10));
       } else if (buffetPrice !== null) {
         if (/\(#\)|\[#\]|#/.test(line)) {
           buffetNoMeat = true;
@@ -293,8 +296,31 @@ function gongdae(cells: MealCell[]): GeneralizedMeals[] {
       const hasNoMeat = /\(#\)|\[#\]|#/.test(name);
       const cleanName = name.replaceAll("(#)", "").replaceAll("[#]", "").replaceAll("#", "").trim();
       meals.push({
-        price: name === "호구세트" ? 8300 : Number.parseInt(match[2].replaceAll(",", ""), 10),
+        price: normalizePrice(Number.parseInt(match[2].replaceAll(",", ""), 10)),
         no_meat: hasNoMeat,
+        menus: [cleanName],
+      });
+    }
+    return meals.length ? [{ type, meals }] : [];
+  });
+}
+
+function burgerun(cells: MealCell[]): GeneralizedMeals[] {
+  return cells.flatMap(({ type, lines }) => {
+    const meals: Meal[] = [];
+    for (const line of lines) {
+      if (line.startsWith("※") || line.startsWith("<")) continue;
+      const match = /^(.+?)\s*[-:]\s*([\d,]+)\s*원/.exec(line);
+      if (!match) continue;
+      const cleanName = match[1]
+        .replaceAll("(#)", "")
+        .replaceAll("[#]", "")
+        .replaceAll("#", "")
+        .trim();
+      if (!cleanName) continue;
+      meals.push({
+        price: normalizePrice(Number.parseInt(match[2].replaceAll(",", ""), 10)),
+        no_meat: /\(#\)|\[#\]|#/.test(match[1]),
         menus: [cleanName],
       });
     }
@@ -327,7 +353,7 @@ function sectionedOptionalPrice(
       const menus = normalize(match[1], restaurant);
       if (!menus.length) continue;
       pushMeal(groups, restaurant, {
-        price: Number.parseInt(match[2].replaceAll(",", ""), 10),
+        price: normalizePrice(Number.parseInt(match[2].replaceAll(",", ""), 10)),
         no_meat: hasNoMeat,
         menus,
       });
@@ -385,6 +411,7 @@ const CAFETERIAS = new Map<string, Cafeteria>([
   ["302동식당", { restaurant: "302동식당", generalize: dong302 }],
   ["301동식당", { restaurant: "301동식당", generalize: generalize301 }],
   ["공대간이식당", { restaurant: "공대간이식당", generalize: gongdae }],
+  ["버거운버거", { restaurant: "버거운버거", generalize: burgerun }],
   ["75-1동 4층 푸드코트", { restaurant: "4층 푸드코트", generalize: foodcourt4f }],
   ["220동식당", { restaurant: "220동식당", generalize: dong220 }],
 ]);

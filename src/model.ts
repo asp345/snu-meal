@@ -18,6 +18,7 @@ export interface Payload {
 export interface CrawlResult {
   payloads: Payload[];
   sourceCounts: Record<"snuco" | "snudorm" | "vet", number>;
+  failedSources: Array<"snuco" | "snudorm" | "vet">;
 }
 
 export interface Restaurant {

@@ -43,6 +43,7 @@ export async function collectCrawlResults(
   const settled = await Promise.allSettled(CRAWLER_SOURCES.map((source) => crawlers[source]));
   const payloads: Payload[] = [];
   const sourceCounts: CrawlResult["sourceCounts"] = { snuco: 0, snudorm: 0, vet: 0 };
+  const failedSources: CrawlResult["failedSources"] = [];
   const failures: unknown[] = [];
 
   settled.forEach((result, index) => {
@@ -52,6 +53,7 @@ export async function collectCrawlResults(
       sourceCounts[source] = result.value.length;
     } else {
       failures.push(result.reason);
+      failedSources.push(source);
       warn(source, result.reason);
     }
   });
@@ -61,7 +63,7 @@ export async function collectCrawlResults(
   }
 
   rejectDuplicateSlots(payloads);
-  return { payloads, sourceCounts };
+  return { payloads, sourceCounts, failedSources };
 }
 
 export async function crawlAll(now: Date = new Date()): Promise<CrawlResult> {
