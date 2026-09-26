@@ -1,0 +1,1424 @@
+{
+  "date": "2026-09-25",
+  "types": [
+    {
+      "type": "BR",
+      "buildings": [
+        {
+          "building_number": "101동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "burgerun_burger",
+                  "name": "버거운버거",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 9900,
+                      "no_meat": false,
+                      "menus": [
+                        "한입버거운시그니처버거"
+                      ]
+                    },
+                    {
+                      "price": 5200,
+                      "no_meat": false,
+                      "menus": [
+                        "버거운치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "양념치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "핫치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "스노우치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5700,
+                      "no_meat": false,
+                      "menus": [
+                        "딥치즈치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "데리마요치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5800,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리마요치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 7100,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리크런치버거"
+                      ]
+                    },
+                    {
+                      "price": 6100,
+                      "no_meat": false,
+                      "menus": [
+                        "에그마요휠렛버거"
+                      ]
+                    },
+                    {
+                      "price": 6300,
+                      "no_meat": false,
+                      "menus": [
+                        "육즙가득비프버거"
+                      ]
+                    },
+                    {
+                      "price": 7300,
+                      "no_meat": false,
+                      "menus": [
+                        "비프해쉬버거"
+                      ]
+                    },
+                    {
+                      "price": 9500,
+                      "no_meat": false,
+                      "menus": [
+                        "더블비프버거"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "클래식치즈버거"
+                      ]
+                    },
+                    {
+                      "price": 7400,
+                      "no_meat": false,
+                      "menus": [
+                        "투움바더블새우버거"
+                      ]
+                    },
+                    {
+                      "price": 8700,
+                      "no_meat": false,
+                      "menus": [
+                        "투움바비프새우버거"
+                      ]
+                    },
+                    {
+                      "price": 8400,
+                      "no_meat": false,
+                      "menus": [
+                        "통모짜치즈버거"
+                      ]
+                    },
+                    {
+                      "price": 8400,
+                      "no_meat": false,
+                      "menus": [
+                        "불닭통모짜치즈버거"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "통새우버거"
+                      ]
+                    },
+                    {
+                      "price": 7700,
+                      "no_meat": false,
+                      "menus": [
+                        "더블통새우버거"
+                      ]
+                    },
+                    {
+                      "price": 4400,
+                      "no_meat": false,
+                      "menus": [
+                        "불고기버거"
+                      ]
+                    },
+                    {
+                      "price": 6400,
+                      "no_meat": false,
+                      "menus": [
+                        "더블불고기버거"
+                      ]
+                    },
+                    {
+                      "price": 6600,
+                      "no_meat": false,
+                      "menus": [
+                        "불새버거"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "달콤비프치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5400,
+                      "no_meat": false,
+                      "menus": [
+                        "소시지치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5400,
+                      "no_meat": false,
+                      "menus": [
+                        "매콤치킨치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5300,
+                      "no_meat": false,
+                      "menus": [
+                        "콘치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 4900,
+                      "no_meat": false,
+                      "menus": [
+                        "풀치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "휠렛불갈비치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "베이컨에그치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 10900,
+                      "no_meat": false,
+                      "menus": [
+                        "후라이드치킨"
+                      ]
+                    },
+                    {
+                      "price": 11900,
+                      "no_meat": false,
+                      "menus": [
+                        "양념치킨"
+                      ]
+                    },
+                    {
+                      "price": 12900,
+                      "no_meat": false,
+                      "menus": [
+                        "매운양념치킨"
+                      ]
+                    },
+                    {
+                      "price": 11900,
+                      "no_meat": false,
+                      "menus": [
+                        "스노우치킨"
+                      ]
+                    },
+                    {
+                      "price": 11900,
+                      "no_meat": false,
+                      "menus": [
+                        "소이마요치킨"
+                      ]
+                    },
+                    {
+                      "price": 12900,
+                      "no_meat": false,
+                      "menus": [
+                        "핫소마요치킨"
+                      ]
+                    },
+                    {
+                      "price": 12900,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리마요치킨"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "후라이드통다리"
+                      ]
+                    },
+                    {
+                      "price": 6100,
+                      "no_meat": false,
+                      "menus": [
+                        "자메이카통다리"
+                      ]
+                    },
+                    {
+                      "price": 5000,
+                      "no_meat": false,
+                      "menus": [
+                        "케이준순살강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "허니치즈강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "화이트어니언강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "불닭레드핫강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 3400,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리스치즈스틱 1조각"
+                      ]
+                    },
+                    {
+                      "price": 2900,
+                      "no_meat": false,
+                      "menus": [
+                        "버팔로스틱 2조각"
+                      ]
+                    },
+                    {
+                      "price": 4900,
+                      "no_meat": false,
+                      "menus": [
+                        "눈꽃치즈떡볶이 / 투움바떡볶이"
+                      ]
+                    },
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "밀크치즈볼 5조각"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "치즈스틱 2조각"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "양념감자(소)"
+                      ]
+                    },
+                    {
+                      "price": 7000,
+                      "no_meat": false,
+                      "menus": [
+                        "팝콘볼박스"
+                      ]
+                    },
+                    {
+                      "price": 4600,
+                      "no_meat": false,
+                      "menus": [
+                        "매콤김소떡"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "치킨너겟 4조각"
+                      ]
+                    },
+                    {
+                      "price": 3000,
+                      "no_meat": false,
+                      "menus": [
+                        "김말이 10조각"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "쉬림프샐러드"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "에그베이컨샐러드"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "닭가슴살샐러드"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "치킨샐러드"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "콘샐러드"
+                      ]
+                    },
+                    {
+                      "price": 1900,
+                      "no_meat": false,
+                      "menus": [
+                        "탄산음료 M"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "아메리카노 HOT"
+                      ]
+                    },
+                    {
+                      "price": 2500,
+                      "no_meat": false,
+                      "menus": [
+                        "제주청귤/청포도에이드"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "LU",
+      "buildings": [
+        {
+          "building_number": "101동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "burgerun_burger",
+                  "name": "버거운버거",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 9900,
+                      "no_meat": false,
+                      "menus": [
+                        "한입버거운시그니처버거"
+                      ]
+                    },
+                    {
+                      "price": 5200,
+                      "no_meat": false,
+                      "menus": [
+                        "버거운치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "양념치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "핫치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "스노우치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5700,
+                      "no_meat": false,
+                      "menus": [
+                        "딥치즈치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "데리마요치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5800,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리마요치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 7100,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리크런치버거"
+                      ]
+                    },
+                    {
+                      "price": 6100,
+                      "no_meat": false,
+                      "menus": [
+                        "에그마요휠렛버거"
+                      ]
+                    },
+                    {
+                      "price": 6300,
+                      "no_meat": false,
+                      "menus": [
+                        "육즙가득비프버거"
+                      ]
+                    },
+                    {
+                      "price": 7300,
+                      "no_meat": false,
+                      "menus": [
+                        "비프해쉬버거"
+                      ]
+                    },
+                    {
+                      "price": 9500,
+                      "no_meat": false,
+                      "menus": [
+                        "더블비프버거"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "클래식치즈버거"
+                      ]
+                    },
+                    {
+                      "price": 7400,
+                      "no_meat": false,
+                      "menus": [
+                        "투움바더블새우버거"
+                      ]
+                    },
+                    {
+                      "price": 8700,
+                      "no_meat": false,
+                      "menus": [
+                        "투움바비프새우버거"
+                      ]
+                    },
+                    {
+                      "price": 8400,
+                      "no_meat": false,
+                      "menus": [
+                        "통모짜치즈버거"
+                      ]
+                    },
+                    {
+                      "price": 8400,
+                      "no_meat": false,
+                      "menus": [
+                        "불닭통모짜치즈버거"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "통새우버거"
+                      ]
+                    },
+                    {
+                      "price": 7700,
+                      "no_meat": false,
+                      "menus": [
+                        "더블통새우버거"
+                      ]
+                    },
+                    {
+                      "price": 4400,
+                      "no_meat": false,
+                      "menus": [
+                        "불고기버거"
+                      ]
+                    },
+                    {
+                      "price": 6400,
+                      "no_meat": false,
+                      "menus": [
+                        "더블불고기버거"
+                      ]
+                    },
+                    {
+                      "price": 6600,
+                      "no_meat": false,
+                      "menus": [
+                        "불새버거"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "달콤비프치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5400,
+                      "no_meat": false,
+                      "menus": [
+                        "소시지치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5400,
+                      "no_meat": false,
+                      "menus": [
+                        "매콤치킨치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5300,
+                      "no_meat": false,
+                      "menus": [
+                        "콘치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 4900,
+                      "no_meat": false,
+                      "menus": [
+                        "풀치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "휠렛불갈비치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "베이컨에그치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 10900,
+                      "no_meat": false,
+                      "menus": [
+                        "후라이드치킨"
+                      ]
+                    },
+                    {
+                      "price": 11900,
+                      "no_meat": false,
+                      "menus": [
+                        "양념치킨"
+                      ]
+                    },
+                    {
+                      "price": 12900,
+                      "no_meat": false,
+                      "menus": [
+                        "매운양념치킨"
+                      ]
+                    },
+                    {
+                      "price": 11900,
+                      "no_meat": false,
+                      "menus": [
+                        "스노우치킨"
+                      ]
+                    },
+                    {
+                      "price": 11900,
+                      "no_meat": false,
+                      "menus": [
+                        "소이마요치킨"
+                      ]
+                    },
+                    {
+                      "price": 12900,
+                      "no_meat": false,
+                      "menus": [
+                        "핫소마요치킨"
+                      ]
+                    },
+                    {
+                      "price": 12900,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리마요치킨"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "후라이드통다리"
+                      ]
+                    },
+                    {
+                      "price": 6100,
+                      "no_meat": false,
+                      "menus": [
+                        "자메이카통다리"
+                      ]
+                    },
+                    {
+                      "price": 5000,
+                      "no_meat": false,
+                      "menus": [
+                        "케이준순살강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "허니치즈강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "화이트어니언강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "불닭레드핫강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 3400,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리스치즈스틱 1조각"
+                      ]
+                    },
+                    {
+                      "price": 2900,
+                      "no_meat": false,
+                      "menus": [
+                        "버팔로스틱 2조각"
+                      ]
+                    },
+                    {
+                      "price": 4900,
+                      "no_meat": false,
+                      "menus": [
+                        "눈꽃치즈떡볶이 / 투움바떡볶이"
+                      ]
+                    },
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "밀크치즈볼 5조각"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "치즈스틱 2조각"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "양념감자(소)"
+                      ]
+                    },
+                    {
+                      "price": 7000,
+                      "no_meat": false,
+                      "menus": [
+                        "팝콘볼박스"
+                      ]
+                    },
+                    {
+                      "price": 4600,
+                      "no_meat": false,
+                      "menus": [
+                        "매콤김소떡"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "치킨너겟 4조각"
+                      ]
+                    },
+                    {
+                      "price": 3000,
+                      "no_meat": false,
+                      "menus": [
+                        "김말이 10조각"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "쉬림프샐러드"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "에그베이컨샐러드"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "닭가슴살샐러드"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "치킨샐러드"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "콘샐러드"
+                      ]
+                    },
+                    {
+                      "price": 1900,
+                      "no_meat": false,
+                      "menus": [
+                        "탄산음료 M"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "아메리카노 HOT"
+                      ]
+                    },
+                    {
+                      "price": 2500,
+                      "no_meat": false,
+                      "menus": [
+                        "제주청귤/청포도에이드"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "919동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "dorm_coop",
+                  "name": "기숙사식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "버섯불고기"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "DN",
+      "buildings": [
+        {
+          "building_number": "101동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "burgerun_burger",
+                  "name": "버거운버거",
+                  "fixed_menu": true,
+                  "meals": [
+                    {
+                      "price": 9900,
+                      "no_meat": false,
+                      "menus": [
+                        "한입버거운시그니처버거"
+                      ]
+                    },
+                    {
+                      "price": 5200,
+                      "no_meat": false,
+                      "menus": [
+                        "버거운치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "양념치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "핫치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "스노우치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5700,
+                      "no_meat": false,
+                      "menus": [
+                        "딥치즈치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5600,
+                      "no_meat": false,
+                      "menus": [
+                        "데리마요치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 5800,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리마요치킨버거"
+                      ]
+                    },
+                    {
+                      "price": 7100,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리크런치버거"
+                      ]
+                    },
+                    {
+                      "price": 6100,
+                      "no_meat": false,
+                      "menus": [
+                        "에그마요휠렛버거"
+                      ]
+                    },
+                    {
+                      "price": 6300,
+                      "no_meat": false,
+                      "menus": [
+                        "육즙가득비프버거"
+                      ]
+                    },
+                    {
+                      "price": 7300,
+                      "no_meat": false,
+                      "menus": [
+                        "비프해쉬버거"
+                      ]
+                    },
+                    {
+                      "price": 9500,
+                      "no_meat": false,
+                      "menus": [
+                        "더블비프버거"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "클래식치즈버거"
+                      ]
+                    },
+                    {
+                      "price": 7400,
+                      "no_meat": false,
+                      "menus": [
+                        "투움바더블새우버거"
+                      ]
+                    },
+                    {
+                      "price": 8700,
+                      "no_meat": false,
+                      "menus": [
+                        "투움바비프새우버거"
+                      ]
+                    },
+                    {
+                      "price": 8400,
+                      "no_meat": false,
+                      "menus": [
+                        "통모짜치즈버거"
+                      ]
+                    },
+                    {
+                      "price": 8400,
+                      "no_meat": false,
+                      "menus": [
+                        "불닭통모짜치즈버거"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "통새우버거"
+                      ]
+                    },
+                    {
+                      "price": 7700,
+                      "no_meat": false,
+                      "menus": [
+                        "더블통새우버거"
+                      ]
+                    },
+                    {
+                      "price": 4400,
+                      "no_meat": false,
+                      "menus": [
+                        "불고기버거"
+                      ]
+                    },
+                    {
+                      "price": 6400,
+                      "no_meat": false,
+                      "menus": [
+                        "더블불고기버거"
+                      ]
+                    },
+                    {
+                      "price": 6600,
+                      "no_meat": false,
+                      "menus": [
+                        "불새버거"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "달콤비프치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5400,
+                      "no_meat": false,
+                      "menus": [
+                        "소시지치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5400,
+                      "no_meat": false,
+                      "menus": [
+                        "매콤치킨치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5300,
+                      "no_meat": false,
+                      "menus": [
+                        "콘치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 4900,
+                      "no_meat": false,
+                      "menus": [
+                        "풀치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 6000,
+                      "no_meat": false,
+                      "menus": [
+                        "휠렛불갈비치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "베이컨에그치즈베이크"
+                      ]
+                    },
+                    {
+                      "price": 10900,
+                      "no_meat": false,
+                      "menus": [
+                        "후라이드치킨"
+                      ]
+                    },
+                    {
+                      "price": 11900,
+                      "no_meat": false,
+                      "menus": [
+                        "양념치킨"
+                      ]
+                    },
+                    {
+                      "price": 12900,
+                      "no_meat": false,
+                      "menus": [
+                        "매운양념치킨"
+                      ]
+                    },
+                    {
+                      "price": 11900,
+                      "no_meat": false,
+                      "menus": [
+                        "스노우치킨"
+                      ]
+                    },
+                    {
+                      "price": 11900,
+                      "no_meat": false,
+                      "menus": [
+                        "소이마요치킨"
+                      ]
+                    },
+                    {
+                      "price": 12900,
+                      "no_meat": false,
+                      "menus": [
+                        "핫소마요치킨"
+                      ]
+                    },
+                    {
+                      "price": 12900,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리마요치킨"
+                      ]
+                    },
+                    {
+                      "price": 5900,
+                      "no_meat": false,
+                      "menus": [
+                        "후라이드통다리"
+                      ]
+                    },
+                    {
+                      "price": 6100,
+                      "no_meat": false,
+                      "menus": [
+                        "자메이카통다리"
+                      ]
+                    },
+                    {
+                      "price": 5000,
+                      "no_meat": false,
+                      "menus": [
+                        "케이준순살강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "허니치즈강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "화이트어니언강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "불닭레드핫강정(소)"
+                      ]
+                    },
+                    {
+                      "price": 3400,
+                      "no_meat": false,
+                      "menus": [
+                        "칠리스치즈스틱 1조각"
+                      ]
+                    },
+                    {
+                      "price": 2900,
+                      "no_meat": false,
+                      "menus": [
+                        "버팔로스틱 2조각"
+                      ]
+                    },
+                    {
+                      "price": 4900,
+                      "no_meat": false,
+                      "menus": [
+                        "눈꽃치즈떡볶이 / 투움바떡볶이"
+                      ]
+                    },
+                    {
+                      "price": 4500,
+                      "no_meat": false,
+                      "menus": [
+                        "밀크치즈볼 5조각"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "치즈스틱 2조각"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "양념감자(소)"
+                      ]
+                    },
+                    {
+                      "price": 7000,
+                      "no_meat": false,
+                      "menus": [
+                        "팝콘볼박스"
+                      ]
+                    },
+                    {
+                      "price": 4600,
+                      "no_meat": false,
+                      "menus": [
+                        "매콤김소떡"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "치킨너겟 4조각"
+                      ]
+                    },
+                    {
+                      "price": 3000,
+                      "no_meat": false,
+                      "menus": [
+                        "김말이 10조각"
+                      ]
+                    },
+                    {
+                      "price": 6500,
+                      "no_meat": false,
+                      "menus": [
+                        "쉬림프샐러드"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "에그베이컨샐러드"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "닭가슴살샐러드"
+                      ]
+                    },
+                    {
+                      "price": 5500,
+                      "no_meat": false,
+                      "menus": [
+                        "치킨샐러드"
+                      ]
+                    },
+                    {
+                      "price": 2100,
+                      "no_meat": false,
+                      "menus": [
+                        "콘샐러드"
+                      ]
+                    },
+                    {
+                      "price": 1900,
+                      "no_meat": false,
+                      "menus": [
+                        "탄산음료 M"
+                      ]
+                    },
+                    {
+                      "price": 2000,
+                      "no_meat": false,
+                      "menus": [
+                        "아메리카노 HOT"
+                      ]
+                    },
+                    {
+                      "price": 2500,
+                      "no_meat": false,
+                      "menus": [
+                        "제주청귤/청포도에이드"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "919동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "dorm_coop",
+                  "name": "기숙사식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": 6000,
+                      "no_meat": true,
+                      "menus": [
+                        "직화오징어덮밥"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "building_number": "85동",
+          "venues": [
+            {
+              "name": null,
+              "restaurants": [
+                {
+                  "code": "vet",
+                  "name": "수의대식당",
+                  "fixed_menu": false,
+                  "meals": [
+                    {
+                      "price": null,
+                      "no_meat": false,
+                      "menus": [
+                        "제육볶음"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
