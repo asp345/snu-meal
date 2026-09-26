@@ -39,14 +39,3 @@ export interface DateMenu {
   date: string;
   types: MealSection[];
 }
-
-export interface AppState {
-  manifest: Manifest | null;
-  dataBase: string;
-  selectedDate: string;
-  selectedType: MealType;
-  includeFixed: boolean;
-  currentMenu: DateMenu | null;
-  menuCache: Map<string, DateMenu>;
-  requestSequence: number;
-}

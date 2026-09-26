@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createInitialState, dateFromIso, initialMealType, localIsoDate } from "./state.js";
+import { dateFromIso, initialMealType, localIsoDate } from "./state.js";
 
 test("KST date helpers", () => {
   assert.equal(localIsoDate(new Date("2026-07-20T15:00:00.000Z")), "2026-07-21");
@@ -11,11 +11,4 @@ test("initial meal type follows KST hours", () => {
   assert.equal(initialMealType(new Date("2026-07-20T00:30:00.000Z")), "BR");
   assert.equal(initialMealType(new Date("2026-07-20T01:00:00.000Z")), "LU");
   assert.equal(initialMealType(new Date("2026-07-20T07:00:00.000Z")), "DN");
-});
-
-test("initial state defaults", () => {
-  const state = createInitialState();
-  assert.equal(state.includeFixed, false);
-  assert.equal(state.manifest, null);
-  assert.ok(["BR", "LU", "DN"].includes(state.selectedType));
 });

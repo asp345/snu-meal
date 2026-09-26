@@ -2,5 +2,7 @@ node_modules
 dist
 public/app.js
 public/data
+public/index.html
+public/assets
 package-lock.json
 flake.lock

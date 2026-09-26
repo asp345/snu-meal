@@ -9,7 +9,7 @@ export async function fetchJson<T>(url: string): Promise<T> {
 }
 
 export async function resolveDataBase(): Promise<string> {
-  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return "./data";
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return "/public/data";
   try {
     const commit = await fetchJson<{ sha?: unknown }>(
       `https://api.github.com/repos/${REPOSITORY}/commits/data`,
@@ -19,8 +19,6 @@ export async function resolveDataBase(): Promise<string> {
     }
     return `https://raw.githubusercontent.com/${REPOSITORY}/${commit.sha}`;
   } catch {
-    // GitHub API is rate-limited to 60 req/h unauthenticated (docs.github.com/en/rest/using-the-rest-api/rate-limits).
-    // Fall back to the branch tip which is cacheable via raw.githubusercontent and works without API.
     return `https://raw.githubusercontent.com/${REPOSITORY}/data`;
   }
 }
