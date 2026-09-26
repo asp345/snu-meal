@@ -9,7 +9,9 @@ export async function fetchJson<T>(url: string): Promise<T> {
 }
 
 export async function resolveDataBase(): Promise<string> {
-  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return "/public/data";
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    return `${import.meta.env.BASE_URL}public/data`;
+  }
   try {
     const commit = await fetchJson<{ sha?: unknown }>(
       `https://api.github.com/repos/${REPOSITORY}/commits/data`,
