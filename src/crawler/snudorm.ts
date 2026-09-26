@@ -29,6 +29,7 @@ const BLOCK_TAGS = new Set([
 ]);
 const TIME_RE = /^※\s*운영시간\s*:\s*(\d{1,2}:\d{2}~\d{1,2}:\d{2})$/;
 const PRICE_RE = /^(.+?)\s*[:;：；]\s*([\d,]+원)$/;
+const CLOSURE_RE = /휴무|미운영/;
 
 interface DormCafeteria {
   heading: string;
@@ -137,7 +138,7 @@ function parseMenuLines(lines: string[], type: MealType, cafeteria: DormCafeteri
   let pendingPrice: number | null = null;
   for (const rawLine of lines) {
     const line = rawLine.trim();
-    if (!line) continue;
+    if (!line || CLOSURE_RE.test(line)) continue;
     const [menuText, price] = parseMenuLine(line);
     const hasNoMeat = /\(#\)|\[#\]|#/.test(menuText);
     const menus = normalizeMenuNames(menuText, type, cafeteria);
