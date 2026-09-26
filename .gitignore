@@ -1,5 +1,6 @@
 /public/data
 /public/assets
+/public/index.html
 /dist
 node_modules
 .DS_Store
