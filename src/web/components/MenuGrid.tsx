@@ -26,11 +26,6 @@ export function MenuGrid(props: MenuGridProps) {
       .filter((venue) => venue.restaurants.length > 0),
   );
 
-  const buildingCount = createMemo(() => new Set(venues().map((v) => v.building_number)).size);
-  const restaurantCount = createMemo(() =>
-    venues().reduce((sum, venue) => sum + venue.restaurants.length, 0),
-  );
-
   return (
     <Show
       when={section()}
@@ -60,9 +55,7 @@ export function MenuGrid(props: MenuGridProps) {
           <h2 class="result-title">
             {DATE_HEADING_FORMATTER.format(dateFromIso(props.menu.date))}
           </h2>
-          <p class="result-count">
-            {buildingCount()}개 건물 · {restaurantCount()}개 식당
-          </p>
+          <p class="result-count">{venues().length}개 식당</p>
         </div>
         <div class="building-grid">
           <For each={venues()}>
