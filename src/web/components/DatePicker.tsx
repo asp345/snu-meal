@@ -137,9 +137,11 @@ export function DatePicker(props: DatePickerProps) {
             aria-label="오늘로 이동"
             onClick={() => props.onSelect(props.today)}
           >
-            <svg viewBox="0 0 16 16" aria-hidden="true">
-              <path d="M3 3l5 5-5 5M8 3l5 5-5 5" />
-            </svg>
+            <span class="today-jump-icon">
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M3 3l5 5-5 5M8 3l5 5-5 5" />
+              </svg>
+            </span>
           </button>
         )}
       </Show>

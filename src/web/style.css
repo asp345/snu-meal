@@ -420,27 +420,44 @@ main {
 
 .today-jump {
   position: absolute;
-  top: 50%;
+  top: 0;
+  bottom: 0;
+  display: grid;
+  width: 64px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.today-jump.previous {
+  left: 0;
+}
+
+.today-jump.next {
+  right: 0;
+}
+
+.today-jump:focus-visible {
+  outline: none;
+}
+
+.today-jump-icon {
   display: grid;
   width: 36px;
   height: 36px;
   place-items: center;
-  padding: 0;
   border: 1px solid var(--line);
   border-radius: 50%;
   color: var(--blue-800);
   background: var(--surface);
   box-shadow: 0 2px 8px rgba(7, 26, 47, 0.12);
-  cursor: pointer;
-  transform: translateY(-50%);
 }
 
-.today-jump.previous {
-  left: 8px;
-}
-
-.today-jump.next {
-  right: 8px;
+.today-jump:focus-visible .today-jump-icon {
+  outline: 3px solid rgba(23, 75, 130, 0.22);
+  outline-offset: 2px;
 }
 
 .today-jump svg {
