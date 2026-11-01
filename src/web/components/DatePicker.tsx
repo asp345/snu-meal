@@ -39,32 +39,34 @@ export function DatePicker(props: DatePickerProps) {
   };
 
   return (
-    <div
-      class="date-picker"
-      role="group"
-      aria-label="날짜 선택"
-      ref={container}
-      onScrollEnd={selectCentered}
-    >
-      {props.dates.map((date) => {
-        const value = dateFromIso(date);
-        const isSelected = date === props.selectedDate;
-        return (
-          <button
-            type="button"
-            class="date-option"
-            data-date={date}
-            aria-pressed={isSelected}
-            aria-label={`${DATE_HEADING_FORMATTER.format(value)} 메뉴`}
-            onClick={() => props.onSelect(date)}
-          >
-            <span class="date-weekday">
-              {date === props.today ? "오늘" : WEEKDAY_FORMATTER.format(value)}
-            </span>
-            <span class="date-number">{`${value.getMonth() + 1}.${value.getDate()}`}</span>
-          </button>
-        );
-      })}
+    <div class="date-dial">
+      <div
+        class="date-picker"
+        role="group"
+        aria-label="날짜 선택"
+        ref={container}
+        onScrollEnd={selectCentered}
+      >
+        {props.dates.map((date) => {
+          const value = dateFromIso(date);
+          const isSelected = date === props.selectedDate;
+          return (
+            <button
+              type="button"
+              class="date-option"
+              data-date={date}
+              aria-pressed={isSelected}
+              aria-label={`${DATE_HEADING_FORMATTER.format(value)} 메뉴`}
+              onClick={() => props.onSelect(date)}
+            >
+              <span class="date-weekday">
+                {date === props.today ? "오늘" : WEEKDAY_FORMATTER.format(value)}
+              </span>
+              <span class="date-number">{`${value.getMonth() + 1}.${value.getDate()}`}</span>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

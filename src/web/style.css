@@ -376,20 +376,41 @@ main {
   margin: 0 auto;
 }
 
-.date-picker {
+.date-dial {
   --date-width: 66px;
   position: relative;
+  min-width: 0;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-muted);
+}
+
+.date-dial::before {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 50%;
+  width: var(--date-width);
+  border: 2px solid var(--blue-800);
+  border-radius: 9px;
+  background: var(--surface);
+  box-shadow: 0 2px 8px rgba(7, 26, 47, 0.1);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.date-picker {
+  position: relative;
   display: grid;
-  width: 100%;
   grid-auto-columns: var(--date-width);
   grid-auto-flow: column;
-  gap: 6px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
-  padding: 1px calc(50% - var(--date-width) / 2) 4px;
+  padding: 0 calc(50% - var(--date-width) / 2);
   scrollbar-width: none;
   scroll-snap-type: x mandatory;
-  mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -398,27 +419,43 @@ main {
 }
 
 .date-option {
-  min-height: 58px;
-  padding: 8px 6px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--surface);
+  min-height: 52px;
+  padding: 6px 4px;
+  border: 0;
+  border-radius: 9px;
+  color: var(--muted);
+  background: transparent;
   cursor: pointer;
   scroll-snap-align: center;
-  transition:
-    border-color 160ms ease,
-    background 160ms ease,
-    color 160ms ease;
+  transition: color 160ms ease;
 }
 
 .date-option:hover {
-  border-color: var(--blue-700);
+  color: var(--ink);
 }
 
 .date-option[aria-pressed="true"] {
-  color: #fff;
-  border-color: var(--blue-800);
-  background: var(--blue-800);
+  color: var(--blue-800);
+}
+
+@supports (animation-timeline: view()) {
+  .date-option {
+    animation: dial-item linear both;
+    animation-timeline: view(inline);
+  }
+}
+
+@keyframes dial-item {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .date-weekday,
@@ -427,14 +464,9 @@ main {
 }
 
 .date-weekday {
-  margin-bottom: 4px;
-  color: var(--muted);
+  margin-bottom: 2px;
   font-size: 0.66rem;
   font-weight: 750;
-}
-
-.date-option[aria-pressed="true"] .date-weekday {
-  color: rgba(255, 255, 255, 0.72);
 }
 
 .date-number {
@@ -612,13 +644,8 @@ noscript {
     gap: 7px;
   }
 
-  .date-picker {
+  .date-dial {
     --date-width: 62px;
-    gap: 5px;
-  }
-
-  .date-option {
-    min-height: 56px;
   }
 
   .type-option {
