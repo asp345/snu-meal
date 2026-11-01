@@ -1,4 +1,4 @@
-import { createEffect, on } from "solid-js";
+import { Show, createEffect, on } from "solid-js";
 import { dateFromIso } from "../state";
 import { DATE_HEADING_FORMATTER, WEEKDAY_FORMATTER } from "../format";
 
@@ -17,6 +17,7 @@ interface Drag {
 }
 
 const DRAG_THRESHOLD = 6;
+const TODAY_JUMP_DISTANCE = 3;
 
 function middle(element: HTMLElement): number {
   const rect = element.getBoundingClientRect();
@@ -88,6 +89,13 @@ export function DatePicker(props: DatePickerProps) {
     if (moved) settle();
   };
 
+  const todayDirection = () => {
+    const today = props.dates.indexOf(props.today);
+    const selected = props.dates.indexOf(props.selectedDate);
+    if (today < 0 || selected < 0 || Math.abs(today - selected) < TODAY_JUMP_DISTANCE) return;
+    return today > selected ? "next" : "previous";
+  };
+
   return (
     <div class="date-dial">
       <div
@@ -121,6 +129,20 @@ export function DatePicker(props: DatePickerProps) {
           );
         })}
       </div>
+      <Show when={todayDirection()}>
+        {(direction) => (
+          <button
+            type="button"
+            class={`today-jump ${direction()}`}
+            aria-label="오늘로 이동"
+            onClick={() => props.onSelect(props.today)}
+          >
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M3 3l5 5-5 5M8 3l5 5-5 5" />
+            </svg>
+          </button>
+        )}
+      </Show>
     </div>
   );
 }

@@ -418,6 +418,45 @@ main {
   display: none;
 }
 
+.today-jump {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--blue-800);
+  background: var(--surface);
+  box-shadow: 0 2px 8px rgba(7, 26, 47, 0.12);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.today-jump.previous {
+  left: 8px;
+}
+
+.today-jump.next {
+  right: 8px;
+}
+
+.today-jump svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.today-jump.previous svg {
+  transform: scaleX(-1);
+}
+
 .date-option {
   min-height: 52px;
   padding: 6px 4px;
