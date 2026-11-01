@@ -18,16 +18,11 @@ export const DATE_HEADING_FORMATTER = new Intl.DateTimeFormat("ko-KR", {
   weekday: "long",
 });
 
-export const DATE_SHORT_FORMATTER = new Intl.DateTimeFormat("ko-KR", {
-  month: "numeric",
-  day: "numeric",
-});
-
 export const WEEKDAY_FORMATTER = new Intl.DateTimeFormat("ko-KR", { weekday: "short" });
 
 export const UPDATED_FORMATTER = new Intl.DateTimeFormat("ko-KR", {
   month: "long",
   day: "numeric",
-  hour: "2-digit",
+  hour: "numeric",
   minute: "2-digit",
 });

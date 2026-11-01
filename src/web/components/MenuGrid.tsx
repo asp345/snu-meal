@@ -57,7 +57,6 @@ export function MenuGrid(props: MenuGridProps) {
         }
       >
         <div class="result-heading">
-          <p class="result-eyebrow">{TYPE_LABELS[props.selectedType]}</p>
           <h2 class="result-title">
             {DATE_HEADING_FORMATTER.format(dateFromIso(props.menu.date))}
           </h2>

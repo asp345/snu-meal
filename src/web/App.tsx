@@ -10,7 +10,6 @@ import type { MealType } from "./types";
 import { resolveDataBase, loadManifest, loadMenu } from "./data";
 import { localIsoDate, initialMealType } from "./state";
 import { UPDATED_FORMATTER } from "./format";
-import { Header } from "./components/Header";
 import { ControlBar } from "./components/ControlBar";
 import { MenuGrid } from "./components/MenuGrid";
 import { StatePanel } from "./components/StatePanel";
@@ -86,7 +85,9 @@ export function App() {
 
   return (
     <div class="page-shell">
-      <Header statusText={statusText()} />
+      <header class="site-header">
+        <h1>서울대 학식 정보</h1>
+      </header>
       <main>
         <div class="content">
           <ErrorBoundary
@@ -110,6 +111,10 @@ export function App() {
           </ErrorBoundary>
         </div>
       </main>
+      <footer class="site-footer">
+        <p>식단과 가격은 식당 사정에 따라 달라질 수 있습니다.</p>
+        <p class="data-status">{statusText()}</p>
+      </footer>
       <ControlBar
         dates={sortedDates()}
         selectedDate={selectedDate()}
@@ -120,9 +125,6 @@ export function App() {
         onTypeSelect={setSelectedType}
         onFixedToggle={setIncludeFixed}
       />
-      <footer class="site-footer">
-        <p>식단과 가격은 식당 사정에 따라 달라질 수 있습니다.</p>
-      </footer>
     </div>
   );
 }
