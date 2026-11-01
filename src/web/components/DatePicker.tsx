@@ -19,7 +19,8 @@ interface Drag {
 const DRAG_THRESHOLD = 6;
 
 function middle(element: HTMLElement): number {
-  return element.offsetLeft + element.offsetWidth / 2;
+  const rect = element.getBoundingClientRect();
+  return rect.left + rect.width / 2;
 }
 
 export function DatePicker(props: DatePickerProps) {
@@ -27,15 +28,16 @@ export function DatePicker(props: DatePickerProps) {
   let positioned = false;
   let drag: Drag | undefined;
 
+  const offsetFromCenter = (option: HTMLElement) => middle(option) - middle(container);
+
   const centerOn = (option: HTMLElement, behavior: ScrollBehavior) => {
-    container.scrollTo({ left: middle(option) - container.clientWidth / 2, behavior });
+    container.scrollTo({ left: container.scrollLeft + offsetFromCenter(option), behavior });
   };
 
   const centeredOption = () => {
-    const center = container.scrollLeft + container.clientWidth / 2;
     const options = [...container.querySelectorAll<HTMLElement>(".date-option")];
     return options.reduce((nearest, option) =>
-      Math.abs(middle(option) - center) < Math.abs(middle(nearest) - center) ? option : nearest,
+      Math.abs(offsetFromCenter(option)) < Math.abs(offsetFromCenter(nearest)) ? option : nearest,
     );
   };
 
@@ -48,10 +50,14 @@ export function DatePicker(props: DatePickerProps) {
     }),
   );
 
-  const selectCentered = () => {
+  const settle = () => {
     if (drag) return;
-    const date = centeredOption().dataset.date!;
-    if (date !== props.selectedDate) props.onSelect(date);
+    const option = centeredOption();
+    if (Math.abs(offsetFromCenter(option)) >= 1) {
+      centerOn(option, "smooth");
+      return;
+    }
+    if (option.dataset.date !== props.selectedDate) props.onSelect(option.dataset.date!);
   };
 
   const startDrag = (event: PointerEvent) => {
@@ -66,23 +72,20 @@ export function DatePicker(props: DatePickerProps) {
 
   const moveDrag = (event: PointerEvent) => {
     if (drag?.pointerId !== event.pointerId) return;
-    const distance = event.clientX - drag.startX;
     if (!drag.moved) {
-      if (Math.abs(distance) < DRAG_THRESHOLD) return;
+      if (Math.abs(event.clientX - drag.startX) < DRAG_THRESHOLD) return;
       drag.moved = true;
+      drag.startX = event.clientX;
       container.setPointerCapture(event.pointerId);
-      container.classList.add("dragging");
     }
-    container.scrollLeft = drag.startLeft - distance;
+    container.scrollLeft = drag.startLeft - (event.clientX - drag.startX);
   };
 
   const endDrag = (event: PointerEvent) => {
     if (drag?.pointerId !== event.pointerId) return;
     const moved = drag.moved;
     drag = undefined;
-    if (!moved) return;
-    container.classList.remove("dragging");
-    centerOn(centeredOption(), "smooth");
+    if (moved) settle();
   };
 
   return (
@@ -92,7 +95,7 @@ export function DatePicker(props: DatePickerProps) {
         role="group"
         aria-label="날짜 선택"
         ref={container}
-        onScrollEnd={selectCentered}
+        onScrollEnd={settle}
         onPointerDown={startDrag}
         onPointerMove={moveDrag}
         onPointerUp={endDrag}

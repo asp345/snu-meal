@@ -409,14 +409,9 @@ main {
   overscroll-behavior-x: contain;
   padding: 0 calc(50% - var(--date-width) / 2);
   scrollbar-width: none;
-  scroll-snap-type: x mandatory;
   mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
   touch-action: pan-y;
   user-select: none;
-}
-
-.date-picker.dragging {
-  scroll-snap-type: none;
 }
 
 .date-picker::-webkit-scrollbar {
@@ -431,7 +426,6 @@ main {
   color: var(--muted);
   background: transparent;
   cursor: pointer;
-  scroll-snap-align: center;
   transition: color 160ms ease;
 }
 
