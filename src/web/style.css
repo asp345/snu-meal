@@ -411,7 +411,12 @@ main {
   scrollbar-width: none;
   scroll-snap-type: x mandatory;
   mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.date-picker.dragging {
+  scroll-snap-type: none;
 }
 
 .date-picker::-webkit-scrollbar {
