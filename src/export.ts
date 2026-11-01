@@ -159,10 +159,14 @@ function buildDateMenu(date: string, payloads: Payload[]): DateMenu {
       });
     }
 
-    const exportedBuildings = [...buildings.values()].map((building) => ({
-      building_number: building.building_number,
-      venues: [...building.venues.values()],
-    }));
+    const exportedBuildings = [...buildings.values()]
+      .sort((left, right) =>
+        left.building_number.localeCompare(right.building_number, "ko", { numeric: true }),
+      )
+      .map((building) => ({
+        building_number: building.building_number,
+        venues: [...building.venues.values()],
+      }));
     return exportedBuildings.length ? [{ type, buildings: exportedBuildings }] : [];
   });
 
